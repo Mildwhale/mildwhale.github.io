@@ -36,19 +36,19 @@ iOS 프로젝트의 UI Recording을 하는 방법은 매우 간단합니다.
 
 SearchBar의 TextField는 [XCUIElement.searchField](https://developer.apple.com/documentation/xctest/xcuielementtypequeryprovider/1500393-searchfields)를 통해 찾아낼 수 있습니다.
 
-```
+```swift
 let searchField = app.searchField.firstMatch
 ```
 
 문자 Q를 입력하기 위해서 app의 keys를 찾아 탭 하지 않고, searchField의 [XCUIElement.typeText](https://developer.apple.com/documentation/xctest/xcuielement/1500968-typetext) 함수를 사용하여 입력 할 수 있습니다.
 
-```
+```swift
 searchField.typeText("Q")
 ```
 
 간단한 리펙토링을 거치면 약 10줄이 넘던 코드가 2줄에 완성되는 마법(?)을 볼 수 있습니다.
 
-```
+```swift
 let searchField = app.searchField.firstMatch
 searchField.typeText("Q")
 ```
