@@ -20,7 +20,7 @@ description: Welcome to wayne's world
 
 # List of links in the navigation bar
 navbar-links:
-  Home: "index"
+  Latest Articles: "https://mildwhale.github.io"
   Tags: "tags"
   About Me: "aboutme"
 #  Resources:
@@ -199,7 +199,7 @@ exclude:
 # prose.io config
 prose:
   rooturl: '_posts'
-  media: 'img'
+  media: 'assets/images'
   ignore:
     - 404.html
     - LICENSE
