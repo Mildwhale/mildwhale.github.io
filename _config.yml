@@ -101,7 +101,7 @@ url-pretty: "mildwhale.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 #gtag: ""
 
 # Fill in your Google Analytics ID to track your website using GA
-#google_analytics: ""
+google_analytics: "UA-154450190-1"
 
 # Google Tag Manager ID
 #gtm: ""
