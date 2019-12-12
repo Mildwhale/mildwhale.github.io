@@ -4,6 +4,8 @@ title: About me
 subtitle: iOS Software Engineer at Riiid!
 ---
 
+<center><img src="/assets/images/waynekim.png" width="300" height="300" style="border-radius:50%"></center>
+
 # **김규진 (Kyujin Kim)**
 ---
 꼼꼼한 성격으로 서비스의 안정성을 중요하게 생각하며 원활한 커뮤니케이션을 지향합니다.  
