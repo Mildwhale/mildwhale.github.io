@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "[iOS] Parallel UI Testing"
-description: "iOS 앱의 UI 테스트 시간을 단축할 수 있는 방법을 소개합니다."
+subtitle: "iOS 앱의 UI 테스트 시간을 단축할 수 있는 방법을 소개합니다."
 author: "kyujin.kim"
 date: 2019-12-02
+categories: [iOS, Testing]
 tags: [iOS, UI Test]
 ---
 

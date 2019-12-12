@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "[iOS] Xcode를 이용한 UI 테스트 - UI Recording"
-description: "iOS 앱의 UI 테스트 시간을 단축할 수 있는 방법을 소개합니다."
 author: "kyujin.kim"
 date: 2019-12-05
+categories: [iOS, Testing]
 tags: [iOS, UI Test]
 ---
 

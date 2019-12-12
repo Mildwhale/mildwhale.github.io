@@ -4,6 +4,7 @@ title: "[iOS] SwiftUI와 UIKit 함께 사용하기"
 description: "SwiftUI와 UIKit을 함께 사용하는 방법에 대해 소개합니다."
 author: "kyujin.kim"
 date: 2019-12-10
+categories: [iOS, SwiftUI]
 tags: [iOS, SwiftUI, UIHostingController, UIViewRepresentable, UIViewControllerRepresentable]
 ---
 

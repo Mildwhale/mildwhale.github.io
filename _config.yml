@@ -4,7 +4,7 @@
 title: Wayne's World
 
 # Short description of your site
-description: Welcome to wayne's world
+description: A long term memory storage
 
 # --- Local development options ---
 # If your website is hosted locally rather than on GitHub, then you need to uncomment the next two parameters to set the url and baseurl
@@ -20,7 +20,11 @@ description: Welcome to wayne's world
 
 # List of links in the navigation bar
 navbar-links:
-  Latest Articles: "https://mildwhale.github.io"
+  LATEST ARTICLES: "https://mildwhale.github.io"
+  iOS:
+    - SwiftUI: "category/swiftui"
+    - Testing: "category/testing"
+    - Optimizing: "category/optimizing"
   Tags: "tags"
   About Me: "aboutme"
 #  Resources:
