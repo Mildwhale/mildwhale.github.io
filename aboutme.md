@@ -4,7 +4,7 @@ title: About me
 subtitle: iOS Software Engineer at Riiid!
 ---
 
-<center><img src="/assets/images/waynekim.png" width="300" height="300" style="border-radius:50%"></center>
+<center><img src="/assets/images/waynekim.png" width="250" height="250" style="border-radius:50%"></center>
 
 # **김규진 (Kyujin Kim)**
 ---
@@ -21,7 +21,7 @@ subtitle: iOS Software Engineer at Riiid!
 # **EXPERIENCE**
 ---
 ## Riiid! (2019. 09 ~ 재직중)
-RxSwift와 자체 개발한 [단방향 아키텍쳐](https://github.com/geppetto-ios/Geppetto)를 사용하여 [산타토익 iOS 앱](https://apps.apple.com/kr/app/산타토익-비인간적-점수상승/id1148006701)을 개발하고 있으며, 뤼이드의 신규 프로젝트에 참여하여 iOS 앱을 개발합니다.
+RxSwift와 [단방향 아키텍쳐(DRFA)](https://github.com/geppetto-ios/Geppetto)를 사용하는 [산타토익 iOS 앱](https://apps.apple.com/kr/app/산타토익-비인간적-점수상승/id1148006701)과 뤼이드의 신규 프로젝트에 참여하여 iOS 앱을 개발하고 있습니다.
 
 ### 주요 성과
 - [UI 테스트 자동화 및 병렬화](https://riiid.github.io/2019-12-02/iOS-parallel-ui-testing/)
