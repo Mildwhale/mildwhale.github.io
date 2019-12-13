@@ -109,6 +109,5 @@ struct ColorUISlider: UIViewRepresentable {
 위에서 설명한 내용을 실습할 수 있는 튜토리얼은 참고자료의 `Interfacing with UIKit`에 준비되어 있습니다. 이 주제와 이어지는 Data Dependency를 처리할 수 있는 방법과, 다양한 SwiftUI 튜토리얼을 제공하고 있으니 꼭 한번 실습해보시는 것을 추천합니다.
 
 ## 참고자료
-[Interfacing with UIKit](https://developer.apple.com/tutorials/swiftui/interfacing-with-uikit)
-
-[SwiftUI by Tutorials](https://store.raywenderlich.com/products/swiftui-by-tutorials)
+- [Interfacing with UIKit](https://developer.apple.com/tutorials/swiftui/interfacing-with-uikit)  
+- [SwiftUI by Tutorials](https://store.raywenderlich.com/products/swiftui-by-tutorials)
