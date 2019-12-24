@@ -7,8 +7,8 @@
 
   <meta name="author" content="{{ site.author.name }}" />
 
-  {% if page.subtitle %}
-  <meta name="description" content="{{ page.subtitle }}">
+  {% if page.description %}
+  <meta name="description" content="{{ page.description }}">
   {% endif %}
 
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }} {{ site.title-separator }} {{ site.description }}" href="{{ '/feed.xml' | absolute_url }}" />
@@ -68,8 +68,8 @@
 
    {% if page.meta-description %}
   <meta property="og:description" content="{{ page.meta-description }}">
-  {% elsif page.subtitle %}
-  <meta property="og:description" content="{{ page.subtitle }}">
+  {% elsif page.description %}
+  <meta property="og:description" content="{{ page.description }}">
   {% else %}
   <meta property="og:description" content="{{ page.content | strip_html | xml_escape | truncatewords: 50 }}">
   {% endif %}
@@ -107,8 +107,8 @@
 
   {% if page.meta-description %}
   <meta name="twitter:description" content="{{ page.meta-description }}">
-  {% elsif page.subtitle %}
-  <meta name="twitter:description" content="{{ page.subtitle }}">
+  {% elsif page.description %}
+  <meta name="twitter:description" content="{{ page.description }}">
   {% else %}
   <meta name="twitter:description" content="{{ page.content | strip_html | xml_escape | truncatewords: 50 }}">
   {% endif %}
@@ -127,5 +127,5 @@
   <!-- Staticman -->
   <link rel="stylesheet" href="{{ "/css/staticman.css" | relative_url }}" />
   {% endif %}
-
+  {% seo %}
 </head>

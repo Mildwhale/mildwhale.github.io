@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[iOS] Xcode를 이용한 UI 테스트 - 2"
-subtitle: "테스트 케이스 작성"
+description: "테스트 케이스 작성해보기"
 author: "kyujin.kim"
 date: 2019-12-01
 categories: [iOS, Testing]

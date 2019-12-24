@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[iOS] Xcode를 이용한 UI 테스트 - 1"
-subtitle: "테스트 프로젝트와 테스트 시나리오"
+description: "테스트 프로젝트 소개와 테스트 시나리오 작성하기"
 author: "kyujin.kim"
 date: 2019-11-30
 categories: [iOS, Testing]

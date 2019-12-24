@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[iOS] 레퍼런스 카운팅 (Reference Counting)"
-subtitle: "iOS의 메모리 관리 기법에 대하여"
+description: "iOS의 메모리 관리 기법에 대하여"
 author: "kyujin.kim"
 date: 2019-10-31
 categories: [iOS, Optimizing]

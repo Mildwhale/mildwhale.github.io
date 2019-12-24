@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[iOS] Xcode를 이용한 UI 테스트 - 3"
-subtitle: "마우스로 테스트 코드를 만들어보자"
+description: "마우스로 테스트 코드를 만들어보자"
 author: "kyujin.kim"
 date: 2019-12-03
 categories: [iOS, Testing]

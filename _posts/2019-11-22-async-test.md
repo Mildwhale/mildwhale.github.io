@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[iOS] Xcode에서 비동기 작업 테스트하기"
-subtitle: "비동기 API를 테스트 하기 위한 방법을 소개합니다"
+description: "비동기 API를 테스트 하기 위한 방법을 소개합니다"
 author: "kyujin.kim"
 date: 2019-11-22
 categories: [iOS, Testing]

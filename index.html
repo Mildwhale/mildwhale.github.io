@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Wayne's World
-subtitle: A LONG TERM MEMORY STORAGE
+description: A LONG TERM MEMORY STORAGE
 bigimg: assets/images/index.jpg
 use-site-title: true
 ---
@@ -12,9 +12,9 @@ use-site-title: true
     <a href="{{ post.url | relative_url }}">
       <h2 class="post-title">{{ post.title }}</h2>
 
-      {% if post.subtitle %}
+      {% if post.description %}
       <h3 class="post-subtitle">
-        {{ post.subtitle }}
+        {{ post.description }}
       </h3>
       {% endif %}
     </a>
