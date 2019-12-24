@@ -13,8 +13,7 @@ subtitle: iOS Software Engineer at Riiid!
 
 **Email** <mailto:hysterit@gmail.com>  
 **Github** [https://github.com/Mildwhale](https://github.com/Mildwhale)  
-**Blog 1** [https://mildwhale.github.io](https://mildwhale.github.io)  
-**Blog 2** [https://mildwhale.tistory.com (Github로 이전중)](https://mildwhale.tistory.com)  
+**Blog** [https://mildwhale.github.io](https://mildwhale.github.io)  
 
 <br/>
 
