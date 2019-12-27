@@ -165,7 +165,11 @@ img {
     padding: 0;
   }
 }
-
+.center-image
+{
+    margin: 0 auto;
+    display: block;
+}
 .navbar-custom .avatar-container {
   position: absolute;
   left: 50%;
