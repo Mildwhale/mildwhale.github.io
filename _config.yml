@@ -20,7 +20,8 @@ description: A long term memory storage
 
 # List of links in the navigation bar
 navbar-links:
-  LATEST ARTICLES: "https://mildwhale.github.io"
+  LATEST ARTICLES: "/"
+  FEATURED: "category/featured"
   iOS:
     - SwiftUI: "category/swiftui"
     - Testing: "category/testing"

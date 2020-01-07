@@ -4,6 +4,7 @@ title: "iOS 13에서 다크 모드 지원하기 (Supporting Dark Mode)"
 description: "아직도 다크 모드 지원을 안 한 앱이 있다고요?"
 author: "kyujin.kim"
 date: 2019-12-27
+categories: [iOS, Testing, Featured]
 tags: [iOS, Design]
 ---
 
