@@ -148,3 +148,4 @@ for i in stride(from: 0.0, through: times, by: 1.0) {
 ---
 - [Increasing Performance by Reducing Dynamic Dispatch - Apple Blog](https://developer.apple.com/swift/blog/?id=27)
 - [Access Control - Swift.org](https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html)
+- [Optimizing Swift Performance - WWDC 2015](https://developer.apple.com/videos/play/wwdc2015/409/?time=1399)
