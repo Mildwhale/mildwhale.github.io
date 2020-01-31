@@ -39,7 +39,7 @@ for i in stride(from: 0.0, through: 360, by: 1.0) {
 }
 ```
 
-컴파일러는 아래에 쓰여진대로 동적으로 디스패치 된 호출을 발행합니다:
+컴파일러는 아래에 쓰여진대로 동적으로 디스패치 된 호출을 내보냅니다:
 
 1. `p`의 `update` 호출.
 2. `p`의 `updatePoint` 호출.
@@ -104,7 +104,7 @@ class ParticleModel {
 }
 ```
 
-위의 예제와 같이 `point`와 `velocity`는 직접적으로 접근되며 `updatePoint()`도 직접 호출 됩니다. 다시 말하지만 `update()`는 `private`이 아니기 때문에 간접적으로 호출 됩니다.
+위의 예제와 같이 `point`와 `velocity`는 직접적으로 접근되며 `updatePoint()`도 직접 호출 됩니다. `final`에서 얘기했던것 처럼 `update()`는 `private`이 아니기 때문에 간접적으로 호출 됩니다.
 
 `final`과 마찬가지로, 클래스 선언 자체에 `private`속성을 적용할 수 있으며 클래스의 모든 프로퍼티와 메서드도 클래스 처럼 `private`이 됩니다.
 
