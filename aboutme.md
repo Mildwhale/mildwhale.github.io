@@ -20,12 +20,15 @@ description: iOS Software Engineer at Riiid!
 # **EXPERIENCE**
 ---
 ## Riiid! (2019. 09 ~ 재직중)
-RxSwift와 [DRFA](https://github.com/geppetto-ios/Geppetto)를 사용하는 [산타토익 iOS 앱](https://apps.apple.com/kr/app/산타토익-비인간적-점수상승/id1148006701)과 뤼이드의 신규 프로젝트에 참여하여 iOS 앱을 개발하고 있습니다.
+RxSwift와 [DRFA](https://github.com/geppetto-ios/Geppetto)를 사용하는 [산타토익 iOS 앱](https://apps.apple.com/kr/app/산타토익-비인간적-점수상승/id1148006701)과 뤼이드의 신규 프로젝트에 참여하여 iOS 앱을 개발하고 있으며, 개발 경험을 동료들과 공유하기 위해 틈틈히 블로그에 글을 작성하고 있습니다.
 
 ### 주요 성과
-- [UI 테스트 자동화 및 병렬화](https://riiid.github.io/2019-12-02/iOS-parallel-ui-testing/)
-- 앱에 영향을 미치는 Crash를 대응하여 **99.9%**의 안정성 확보  
+- 산타토익 iOS앱에 영향을 미치는 Crash를 해결하여 안정성 확보
+- iOS 챕터에서 사용할 수 있는 공통 모듈 및 디자인 시스템 개발
 
+### 블로그 포스트
+- [UI 테스트 자동화 및 병렬화](https://riiid.github.io/2019-12-02/iOS-parallel-ui-testing/)
+- [iOS 13에서 다크 모드 지원하기 (Supporting Dark Mode)](https://riiid.github.io/2019-12-27/iOS-supporting-dark-mode/)  
 ---
 
 ## 데일리호텔 (2017. 06 ~ 2019. 08)
@@ -57,6 +60,9 @@ C++, Objective-C, Java를 사용하여 ['나는생각 한글'](https://www.youtu
 
 <br/>
 
-# **Education**
+# **Side Projects**
 ---
-인천대학교 **컴퓨터공학부 학사** 졸업 (2008. 03 ~ 2014. 02)
+## GROOV
+- 플레이리스트 기반 유튜브 비디오 플레이어입니다.
+- 
+
