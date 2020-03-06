@@ -24,11 +24,13 @@ RxSwift와 [DRFA](https://github.com/geppetto-ios/Geppetto)를 사용하는 [산
 
 ### 주요 성과
 - 산타토익 iOS앱에 영향을 미치는 Crash를 해결하여 안정성 확보
+- 산타토익에 UI 테스트를 작성하여 릴리즈 체크리스트 검증을 자동화
 - iOS 챕터에서 사용할 수 있는 공통 모듈 및 디자인 시스템 개발
 
 ### 블로그 포스트
-- [UI 테스트 자동화 및 병렬화](https://riiid.github.io/2019-12-02/iOS-parallel-ui-testing/)
+- [UI 테스트 병렬화](https://riiid.github.io/2019-12-02/iOS-parallel-ui-testing/)  
 - [iOS 13에서 다크 모드 지원하기 (Supporting Dark Mode)](https://riiid.github.io/2019-12-27/iOS-supporting-dark-mode/)  
+
 ---
 
 ## 데일리호텔 (2017. 06 ~ 2019. 08)
@@ -62,7 +64,5 @@ C++, Objective-C, Java를 사용하여 ['나는생각 한글'](https://www.youtu
 
 # **Side Projects**
 ---
-## GROOV
-- 플레이리스트 기반 유튜브 비디오 플레이어입니다.
-- 
-
+## [GROOV](https://apps.apple.com/kr/app/groov/id1138262409?l=en)
+플레이리스트 기반 유튜브 비디오 플레이어이며, 컨트리뷰터로 개발에 참여하고 있습니다.
