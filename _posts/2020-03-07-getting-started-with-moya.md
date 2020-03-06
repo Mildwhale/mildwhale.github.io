@@ -13,6 +13,9 @@ tags: [iOS, Moya, RxMoya]
 Moya의 사용법을 소개하기 전에 현재 우리가 어떤 방식으로 네트워킹을 구현하고, 어떤 특징이 있는지 알아보는편이 좋겠죠? (바쁘신분은 스크롤을 내리셔도 됩니다 🥺)
 
 ## URLSession & Alamofire
+
+---
+
 우리는 보통 [URLSession](https://developer.apple.com/documentation/foundation/urlsession) 또는 조금 더 간편한 [Alamofire](https://github.com/Alamofire/Alamofire)를 사용하여 네트워킹을 구현하고 있으며, 높은 확률로 `APIManager` 또는 `NetworkModel`와 같은 이름의 네트워킹 레이어를 만들어 API를 관리하고 있을 것 입니다.
 
 <script src="https://gist.github.com/Mildwhale/05e9992e99e1d031c9c18e4660dda612.js"></script>
