@@ -42,11 +42,11 @@ Moya의 사용법을 소개하기 전에 현재 우리가 어떤 방식으로 �
 > 2. Lets you define a clear usage of different endpoints with associated enum values.
 > 3. Treats test stubs as first-class citizens so unit testing is super-easy.
 
-그리고 Moya를 적용하면 아래와 같이 깔끔한 네트워킹 레이어가 구성됩니다. 하지만 이런 의문이 들 수도 있을 겁니다. `'내가 만든 APIManager만 쓰면 똑같은 거 아니야?'`
+그리고 Moya를 적용하면 아래와 같이 깔끔한 네트워킹 레이어가 구성됩니다.
 
 ![image2](/assets/images/getting-started-with-moya/moyalayer.png){: .center-image}{: width="200"}
- 
-물론 그렇게 해도 됩니다! 하지만 바퀴를 재발명하지 않는 것처럼, 이미 훌륭하게 만들어져 있는 프레임워크를 사용하여 개발 시간도 단축하고 유지보수성과 안정성이라는 이득을 챙기는 편이 더 낫지 않을까요? 🧐
+
+<br>
 
 ## Moya 사용해보기
 
@@ -114,9 +114,11 @@ MoyaProvider를 생성할 때 Generic 타입으로 GithubAPI를 지정해주는 
 
 ---
 
-Moya를 사용하면 네트워킹과 관련된 생산성 및 유지보수성이 향상될 거라 생각합니다. 왜냐하면 API에 대한 정보를 TargetType에 딱 한 번만 작성하면 되고, 향후 업데이트가 필요할 경우 이 부분만 업데이트를 해주면 되기 때문이죠.
+지금까지 Moya를 적용하고 간단한 사용 방법에 대해 알아보았습니다. Moya라는 네트워킹 레이어만 사용하는 것을 보고 이런 의문이 들 수도 있을 겁니다. `'내가 만든 APIManager만 쓰면 똑같은 거 아니야?'`
+ 
+물론 그렇게 해도 됩니다! 하지만 바퀴를 재발명하지 않는 것처럼, 이미 훌륭하게 만들어져 있는 프레임워크를 사용하여 개발 시간도 단축하고 유지보수성과 안정성이라는 이득을 챙기는 편이 더 낫지 않을까요? 🧐
 
-서론만 긴 글이 된 것 같아 뭔가 허전하지만, 이번 글은 여기서 마치겠습니다!  
+이번 글은 여기서 마무리하겠습니다. 읽어주셔서 감사합니다!  
 
 응원의 댓글과 의견은 언제든 환영입니다. 😍
 
