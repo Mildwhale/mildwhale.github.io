@@ -4,7 +4,7 @@ title: About me
 description: iOS Software Engineer at Riiid!
 ---
 
-<center><img src="/assets/images/waynekim.png" width="250" height="250" style="border-radius:50%"></center>
+<center><img src="/assets/images/waynekim.jpeg" width="250" height="250" style="border-radius:50%"></center>
 
 # **김규진 (Kyujin Kim)**
 ---
