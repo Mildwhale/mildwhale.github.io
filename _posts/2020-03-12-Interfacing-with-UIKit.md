@@ -8,21 +8,20 @@ categories: [iOS, SwiftUI]
 tags: [iOS, SwiftUI]
 ---
 
-> [본문 링크](https://developer.apple.com/tutorials/swiftui/interfacing-with-uikit#track-the-page-in-a-swiftui-views-state)  
-> SwiftUI는 모든 Apple 플랫폼의 기존 UI 프레임워크들과 함께 완벽하게 동작합니다. 예를 들어, UIKit의 뷰와 뷰 컨트롤러들을 SwiftUI의 뷰 안에 배치할 수 있고, 그 반대도 가능합니다.
+> SwiftUI는 모든 Apple 플랫폼의 기존 UI 프레임워크들과 함께 완벽하게 동작합니다. 예를 들어, UIKit의 뷰와 뷰 컨트롤러들을 SwiftUI의 뷰 안에 배치할 수 있고, 그 반대도 가능합니다.  
+> [본문 링크](https://developer.apple.com/tutorials/swiftui/interfacing-with-uikit#track-the-page-in-a-swiftui-views-state)
 
-이번 글은 **SwiftUI**에서 **UIPageViewController**와 **UIPageControl**을 사용하는 방법에 대해 알아 볼 것입니다.
-
-UIPageViewController를 사용하여 페이징이 되는 **View**(SwiftUI)를 만들어보고, **@State**와 **@Binding** 변수들을 사용하여 데이터를 업데이트하고 UI에 표시 해볼 것 입니다.
+이번 글에서는 **SwiftUI**로 페이징이 되는 **View**를 만들어 볼 것입니다. **UIPageViewController**와 **UIPageControl**을 사용할 것이며, **@State**와 **@Binding**을 사용하여 데이터를 업데이트하는 방법에 대해서도 알아볼 것 입니다.
 
 샘플 프로젝트는 [이곳](https://docs-assets.developer.apple.com/published/0a3f2fc604/InterfacingWithUIKit.zip)에서 다운받으실 수 있습니다.  
-_참고로, 이 글은 **Swift Tutorials**의 [Interfacing with UIKit](https://developer.apple.com/tutorials/swiftui/interfacing-with-uikit#track-the-page-in-a-swiftui-views-state)을 기반으로 작성되었습니다._
+_그리고, 이 글은 **Swift Tutorials**의 [Interfacing with UIKit](https://developer.apple.com/tutorials/swiftui/interfacing-with-uikit#track-the-page-in-a-swiftui-views-state)을 기반으로 작성되었습니다._
 
-## UIPageViewController를 대신하는 View 만들기
+---
 
+## 1. UIPageViewController를 대신하는 View 만들기
 ![section1-1](/assets/images/swift-tutorials/interfacing-with-uikit/section1-1.png){: .center-image}{: width="300"}
 
-SwiftUI에서 UIKit의 뷰와 뷰 컨트롤러를 사용하기 위해서는, **UIViewRepresentable**과 **UIViewControllerRepresentable** 프로토콜을 따르는 타입을 만들어야 합니다. 여기서 만들어진 타입은 UIKit을 생성하고 설정할 수 있으며, SwiftUI는 이 타입의 생명주기를 관리하고 필요 시 업데이트를 수행합니다.
+SwiftUI에서 UIKit의 뷰와 뷰 컨트롤러를 사용하기 위해서는, **UIViewRepresentable**과 **UIViewControllerRepresentable** 프로토콜을 따르는 타입을 만들어야 합니다. 여기서 만들어진 타입은 UIKit을 생성하고 설정할 수 있으며, SwiftUI는 이 타입의 생명주기를 관리하고 필요시 업데이트를 수행합니다.
 
 ### PageViewController 만들기
 프로젝트를 열고, `PageViewController.swift`라는 이름의 SwiftUI 파일을 생성합니다. 그리고 UIViewControllerRepresentable을 따르는 PageViewController를 정의합니다.
@@ -55,9 +54,7 @@ func makeUIViewController(context: Context) -> UIPageViewController {
 }
 ```
 
-두 번째로 [updateUIViewController(_:context:)](https://developer.apple.com/documentation/swiftui/uiviewcontrollerrepresentable/3278035-updateuiviewcontroller) 메서드를 추가합니다. 이 메서드에서는 배열의 첫 번째 뷰 컨트롤러를 보여주기 위해 **setViewControllers(_:direction:animated:)**를 호출하도록 되어 있습니다.
-
-이 메서드는 뷰 컨트롤러에 영향을 미치는 변화가 발생했을 때 호출되며, 이곳에서 Context에 주어지는 정보로 뷰 컨트롤러를 업데이트 해야 합니다.
+두 번째로 [updateUIViewController(_:context:)](https://developer.apple.com/documentation/swiftui/uiviewcontrollerrepresentable/3278035-updateuiviewcontroller) 메서드를 추가합니다. 이 메서드에서는 UIPageViewController에서 보여지는 뷰 컨트롤러를 설정하기 위해 **setViewControllers(_:direction:animated:)**를 호출하도록 되어 있습니다.
 
 ```swift
 func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
@@ -65,6 +62,8 @@ func updateUIViewController(_ pageViewController: UIPageViewController, context:
         [controllers[0]], direction: .forward, animated: true)
 }
 ```
+
+updateUIViewController(_:context:) 메서드는 뷰 컨트롤러에 영향을 미치는 변화가 발생했을 때 호출되며, 이곳에서 Context의 정보로 뷰 컨트롤러를 업데이트 해야 합니다. 이 부분은 조금 뒤에 Coordinator와 함께 알아 볼 예정입니다.
 
 모든 메서드를 추가하면 PageViewController.swift는 아래와 같은 모습을 갖추게 됩니다.
 ```swift
@@ -89,12 +88,12 @@ struct PageViewController: UIViewControllerRepresentable {
 }
 ```
 
-### Step 4 
-Create another SwiftUI view to present your UIViewControllerRepresentable view.
+### PageViewController를 사용하는 PageView 만들기
+지금까지 UIPageViewController를 **대신하는** PageViewController를 만들었습니다. 그럼 이제 이 PageViewController를 사용하는 뷰를 만들 차례겠죠?
 
-Create a new SwiftUI view file, named PageView.swift, and update the PageView type to declare PageViewController as a child view.
+우선, `PageView.swift`라는 이름의 새로운 SwiftUI 파일을 생성하고, 아래 코드를 작성합니다.
 
-Notice that the generic initializer takes an array of views, and nests each one in a UIHostingController. A UIHostingController is a UIViewController subclass that represents a SwiftUI view within UIKit contexts.
+Generic으로 정의된 **Page** 타입을 [UIHostingController](https://developer.apple.com/documentation/swiftui/uihostingcontroller)에 설정해주고, 이니셜라이저의 파라미터로 사용하는 것을 볼 수 있습니다. 다음으로, `body`를 보면 아까 위에서 만들었던 PageViewController를 Child View로 사용하고 있고, 이니셜라이저에서 설정한 `viewControllers`를 넘겨주고 있습니다.
 
 ```swift
 import SwiftUI
@@ -113,31 +112,20 @@ struct PageView<Page: View>: View {
 
 struct PageView_Previews: PreviewProvider {
     static var previews: some View {
-        PageView()
-    }
-}
-```
-
-### Step 5
-Update the preview provider to pass the required array of views, and the preview starts working.
-
-```swift
-struct PageView_Previews: PreviewProvider {
-    static var previews: some View {
         PageView(features.map { FeatureCard(landmark: $0) })
             .aspectRatio(3/2, contentMode: .fit)
     }
 }
 ```
 
-### Step 6
-Pin the PageView preview to the canvas before you continue — this view is where all the action is.
+_여기서 사용한 UIHostingController는 UIViewController의 서브 클래스이며, SwiftUI View를 UIKit에서 사용할 수 있게 해줍니다._
 
-![section1-2](/assets/images/swift-tutorials/interfacing-with-uikit/section1-2.png){: .center-image}{: width="300"}
+---
 
-## Section 2 - Create the View Controller's Data Source
-
+## 2. UIPageViewController의 DataSource 만들기
 ![section2-1](/assets/images/swift-tutorials/interfacing-with-uikit/section2-1.png){: .center-image}{: width="300"}
+
+지금까지 UIPageViewController를 View에서 사용할 수 있도록 만들어보았습니다. 이제 
 
 In a few short steps, you’ve done a lot — the PageViewController uses a UIPageViewController to show content from a SwiftUI view. Now it’s time to enable swiping interactions to move from page to page.
 
@@ -207,4 +195,11 @@ class Coordinator: NSObject, UIPageViewControllerDataSource {
         return parent.controllers[index + 1]
     }
 }
+```
+
+### Step 4
+Add the coordinator as the data source of the UIPageViewController.
+
+```swift
+pageViewController.dataSource = context.coordinator
 ```
