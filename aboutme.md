@@ -61,8 +61,3 @@ HIVE SDK는 모바일 플랫폼이 제공하는 결제와 Notification, 컴투�
 C++, Objective-C, Java를 사용하여 ['나는생각 한글'](https://www.youtube.com/watch?v=0GNEoqaUevs), ['나는생각 영어'](https://www.youtube.com/watch?v=Yjl8Pceo0Zs) 개발에 참여했습니다.
 
 <br/>
-
-# **Side Projects**
----
-## [GROOV](https://apps.apple.com/kr/app/groov/id1138262409?l=en)
-플레이리스트 기반 유튜브 비디오 플레이어이며, 컨트리뷰터로 개발에 참여하고 있습니다.
