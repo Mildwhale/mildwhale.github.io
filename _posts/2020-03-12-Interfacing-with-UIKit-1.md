@@ -162,7 +162,7 @@ func makeCoordinator() -> Coordinator {
 그리고 Coordinator는 UIKit의 일반적인 패턴인 Delegate, DataSource, Target-Action 등의 이벤트를 구현하고 사용할 수도 있습니다.
 
 ### UIPageViewControllerDataSource 추가하기
-Coordinator에 UIPageViewControllerDataSource 프로토콜을 추가하고, 2개의 필수 메서드를 구현합니다. 이 메서드들은 뷰 컨트롤러간의 관계를 설정하여, 서로간에 스와이프가 가능하도록 도와줍니다.
+Coordinator에 UIPageViewControllerDataSource 프로토콜을 추가하고, 2개의 필수 메서드를 구현합니다. 이 메서드들은 뷰 컨트롤러간의 관계를 설정하여, 서로간에 스와이프가 가능하도록 도와줍니다.
 
 ```swift
 class Coordinator: NSObject, UIPageViewControllerDataSource {
