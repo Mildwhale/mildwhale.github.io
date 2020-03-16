@@ -223,4 +223,5 @@ PageView.swift 파일로 이동하여 SwiftUI 프리뷰를 실행(Resume)하고,
 
 다음 글에서는 UIPageControl을 사용하여 현재 페이지의 위치를 표시해볼 겁니다. 이 기능을 구현하기 위해서는 어떻게 해야 할까요? 
 
-그럼 [다음 글](/2020-03-16-Interfacing-with-UIKit-2/) 에서 봽겠습니다. 😎
+그럼 [다음 글](/2020-03-16-Interfacing-with-UIKit-2/) 에서 봽겠습니다.
+읽어주셔서 감사합니다! 😉

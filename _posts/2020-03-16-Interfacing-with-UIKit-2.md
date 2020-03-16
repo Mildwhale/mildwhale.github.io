@@ -173,6 +173,8 @@ func makeUIView(context: Context) -> UIPageControl {
 
 ![result](/assets/images/swift-tutorials/interfacing-with-uikit/result.gif){: .center-image}{: width="320"}
 
+---
+
 ## 마치며
 지금까지 2개의 글을 통해 페이지를 지원하는 View를 만들어 보았습니다. 이 과정에서 UIKit을 SwiftUI에서 사용하는 방법에 대해서도 알 수 있었고, Coordinator, State와 Binding의 사용법에 대해서도 알 수 있었습니다.
 
