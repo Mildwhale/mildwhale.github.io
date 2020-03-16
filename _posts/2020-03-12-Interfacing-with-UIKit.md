@@ -18,7 +18,7 @@ tags: [iOS, SwiftUI]
 
 ---
 
-## 1. UIPageViewController를 대신하는 View 만들기
+## UIPageViewController를 대신하는 View 만들기
 ![section1-1](/assets/images/swift-tutorials/interfacing-with-uikit/section1-1.png){: .center-image}{: width="300"}
 
 SwiftUI에서 UIKit의 뷰와 뷰 컨트롤러를 사용하기 위해서는, **UIViewRepresentable**과 **UIViewControllerRepresentable** 프로토콜을 따르는 View를 만들어야 합니다. 이 프로토콜들을 따르는 View는 UIKit을 생성하고 설정할 수 있으며, SwiftUI가 이 View의 생명주기를 관리하고 필요할 때 업데이트를 수행합니다.
@@ -54,9 +54,9 @@ func makeUIViewController(context: Context) -> UIPageViewController {
 }
 ```
 
-SwiftUI는 View가 화면에 보여질 준비가 되었을 때 이 메서드를 단 한번만 호출하며, 뷰 컨트롤러의 생명주기를 관리합니다.
+SwiftUI는 View가 화면에 보여질 준비가 되었을 때 이 메서드를 단 한번만 호출하여, 뷰 컨트롤러의 생명주기를 관리합니다.
 
-두 번째로, [updateUIViewController(_:context:)](https://developer.apple.com/documentation/swiftui/uiviewcontrollerrepresentable/3278035-updateuiviewcontroller) 메서드를 추가합니다. 이 메서드에서는 UIPageViewController에서 보여지는 뷰 컨트롤러를 설정하기 위해 **setViewControllers(_:direction:animated:)**를 호출하도록 되어 있습니다.
+두 번째로, [updateUIViewController(_:context:)](https://developer.apple.com/documentation/swiftui/uiviewcontrollerrepresentable/3278035-updateuiviewcontroller) 메서드를 추가합니다. 이 메서드는 뷰 컨트롤러에 영향을 미치는 변화가 발생했을 때 호출되며, 이곳에서 뷰 컨트롤러의 속성을 업데이트 할 수 있습니다.
 
 ```swift
 func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
@@ -65,9 +65,10 @@ func updateUIViewController(_ pageViewController: UIPageViewController, context:
 }
 ```
 
-이 메서드는 뷰 컨트롤러에 영향을 미치는 변화가 발생했을 때 호출되며, 이곳에서 뷰 컨트롤러를 업데이트 해야 합니다.
+이 메서드에서는 UIPageViewController에서 보여지는 뷰 컨트롤러를 설정하기 위해 **setViewControllers(_:direction:animated:)**를 호출하도록 되어 있습니다.
 
 모든 메서드를 추가하면 PageViewController.swift는 아래와 같은 모습을 갖추게 됩니다.
+
 ```swift
 import UIKit
 import SwiftUI
@@ -124,7 +125,7 @@ Generic으로 정의된 **Page** 타입을 [UIHostingController](https://develop
 
 ---
 
-## 2. UIPageViewController의 DataSource 설정하기
+## UIPageViewController의 DataSource 구현하기
 ![section2-1](/assets/images/swift-tutorials/interfacing-with-uikit/section2-1.png){: .center-image}{: width="300"}
 
 지금까지 UIPageViewController를 View에서 사용할 수 있도록 만들었습니다. 이제 조금만 더 하면 좌,우 스와이프를 통해 페이지 이동을 구현할 수 있습니다. 
@@ -134,7 +135,7 @@ Generic으로 정의된 **Page** 타입을 [UIHostingController](https://develop
 _우리가 UIKit에서 사용하던 [Coordinator 디자인 패턴](https://www.raywenderlich.com/158-coordinator-tutorial-for-ios-getting-started)과는 전혀 다르기 때문에, 햇갈리지 않도록 주의해야 합니다._
 
 ### Coordinator 정의하기
-> SwiftUI는 UIViewControllerRepresentable 타입의 Coordinator를 관리하고, 위에서 만들었던 메소드를 호출 할 때 컨텍스트의 일부로 제공합니다.
+> SwiftUI는 UIViewControllerRepresentable 타입의 Coordinator를 관리하고, 위에서 만들었던 메소드(make, update)를 호출 할 때 컨텍스트의 일부로 제공합니다.
 
 먼저, PageViewController의 내부에 **Coordinator**라는 이름의 클래스를 추가합니다. UIPageViewController의 Delegate에서 뷰 컨트롤러의 정보에 접근해야 하기 때문에, parent를 추가했습니다. 
 
@@ -148,7 +149,9 @@ class Coordinator: NSObject {
 }
 ```
 
-그리고 바로 아래에 **makeCoordinator()** 함수를 추가합니다. 이 함수는 **makeUIViewController(context:)**함수가 호출되기 전에 자동으로 호출되며, 뷰 컨트롤러를 설정할 때 Context를 통해 Coordinator에 접근할 수 있습니다.
+그리고 바로 아래에 **makeCoordinator()** 함수를 추가합니다. 이 함수는 **makeUIViewController(context:)**함수가 호출되기 전에 자동으로 호출됩니다.
+
+뷰 컨트롤러를 설정할 때 주어지는 Context를 통해 Coordinator에 접근할 수 있습니다.
 
 ```swift
 func makeCoordinator() -> Coordinator {
