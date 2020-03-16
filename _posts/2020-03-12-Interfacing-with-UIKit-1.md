@@ -219,4 +219,6 @@ PageView.swift 파일로 이동하여 SwiftUI 프리뷰를 실행(Resume)하고,
 ## 마치며
 지금까지 UIPageViewController를 사용하여 SwiftUI의 View의 페이징을 구현하고, Coordinator로 dataSource를 설정하는 방법을 알아보았습니다. 
 
-다음글에서는 UIPageControl을 사용하여 현재 페이지의 위치를 표시해볼 예정입니다. 이 기능을 구현하기 위해서는 @State와 @Binding을 사용해야 하는데, 벌써 궁금하지 않으신가요? 😎
+다음 글에서는 UIPageControl을 사용하여 현재 페이지의 위치를 표시해볼 예정입니다. 이 기능을 구현하기 위해서는 @State와 @Binding을 사용해야 하는데, 벌써 궁금하지 않으신가요? 😎
+
+[다음 글 바로가기](/2020-03-16-Interfacing-with-UIKit-2/)
