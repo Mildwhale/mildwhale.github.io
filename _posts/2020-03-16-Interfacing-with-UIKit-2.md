@@ -17,7 +17,7 @@ tags: [iOS, SwiftUI]
 ## State와 Binding으로 Page 추적하기
 ![section3-1](/assets/images/swift-tutorials/interfacing-with-uikit/section3-1.png){: .center-image}{: width="300"}
 
-UIPageControl을 사용하여 지금 보고있는 페이지가 몇 번째인지 알기 위해서는, UIPageViewController가 제공하는 정보를 사용해야 합니다. 이 정보를 서로 연결하기 `@State`와 `@Binding`을 적절히 사용해야 합니다.
+UIPageControl을 사용하여 지금 보고있는 페이지가 몇 번째인지 알기 위해서는, UIPageViewController가 제공하는 정보를 사용해야 합니다. 그리고, 이 정보를 서로 연결하기 위해서는 `@State`와 `@Binding`을 적절히 사용해야 합니다.
 
 이 작업이 완료되면 View의 관계는 위 그림과 같은 형태로 구성됩니다.
 
@@ -40,7 +40,7 @@ struct PageViewController: UIViewControllerRepresentable {
 ```
 
 ### UIPageViewControllerDelegate 구현하기
-PageViewController의 Coordinator는 UIPageViewDataSource만 구현되어있고, Delegate는 구현되어있지 않습니다. 현재 페이지의 위치를 가져오고 싶다면, **UIPageViewControllerDelegate**를 구현해야 합니다.
+PageViewController의 Coordinator에는 UIPageViewController의 Delegate가 구현되어있지 않습니다. 현재 페이지의 위치를 가져오고 싶다면, **UIPageViewControllerDelegate**를 구현해야 합니다.
 
 아래 코드를 참고하여 Coordinator 선언부에 `UIPageViewControllerDelegate`를 추가하고, **(_:didFinishAnimating:previousViewControllers:transitionCompleted completed: Bool)** 메서드를 구현합니다.
 
@@ -61,7 +61,7 @@ class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControlle
 }
 ```
 
-그리고, **makeUIViewController(context: Context)** 함수가 있는 곳으로 이동해서 pageViewController의 delegate를 설정해줍니다.
+그리고 **makeUIViewController(context: Context)** 함수가 있는 곳으로 이동해서 pageViewController의 delegate를 설정해줍니다.
 
 ```swift
 pageViewController.delegate = context.coordinator
@@ -115,7 +115,7 @@ struct PageControl: UIViewRepresentable {
 }
 ```
 
-다음으로 **PageView**의 **body**를 아래 코드와 같이 변경합니다. body를 아래와 같이 변경하면, PageViewController 우측 하단에 UIPageControl이 추가됩니다.
+다음으로 **PageView.swift**의 **body**를 아래 코드로 변경합니다. body를 변경하면 이미지 우측 하단에 UIPageControl이 추가됩니다.
 
 ```swift
 var body: some View {
