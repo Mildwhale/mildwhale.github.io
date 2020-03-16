@@ -1,26 +1,28 @@
 ---
 layout: post
 title: "[SwiftUI] UIKit과 인터페이스 연결하기 - 2/2"
-description: "SwiftUI에서 @State와 @Binding을 사용하여 UIPageControl 적용하기"
+description: "SwiftUI에서 UIPageControl 사용하기"
 author: "kyujin.kim"
 date: 2020-03-16
 categories: [iOS, SwiftUI]
 tags: [iOS, SwiftUI]
 ---
 
-이번 글에서는 SwiftUI에서 **UIPageControl**(UIView)을 사용하는 방법에 대해 알아볼 것입니다. [이전 글](/2020-03-12-Interfacing-with-UIKit-1/)과 이어지는 내용이기 때문에, 아직 못보셨다면 이전 글을 먼저 보고 오셔야 합니다.
+이번 글에서는 UIKit의 **UIPageControl**을 SwiftUI에서 사용하는 방법에 대해 알아볼 것입니다. [이전 글](/2020-03-12-Interfacing-with-UIKit-1/)과 이어지는 내용이기 때문에, 이전 글을 먼저 보고 오셔야 합니다. 😎
 
 이 글은 **Swift Tutorials**의 **Interfacing with UIKit**을 기반으로 작성되었습니다.
 
 ---
 
-## State와 Binding으로 Page 연결하기
+## State와 Binding으로 Page 추적하기
 ![section3-1](/assets/images/swift-tutorials/interfacing-with-uikit/section3-1.png){: .center-image}{: width="300"}
 
-UIPageControl을 추가하기 전에, 우리는 지금 몇 번째 페이지가 보여지고 있는지 알 필요가 있습니다. 이 기능을 구현하기 위해서는 **PageView**에 `@State` 변수를 정의하고, **PageViewController**의 `@Binding` 변수에 연결 해줘야 합니다. 왜냐하면, UIPageViewController의 Delegate는 PageViewController의 Coordinator에 구현 할 것이기 때문이죠.
+UIPageControl을 사용하여 지금 보고있는 페이지가 몇 번째인지 알기 위해서는, UIPageViewController가 제공하는 정보를 사용해야 합니다. 이 정보를 서로 연결하기 `@State`와 `@Binding`을 적절히 사용해야 합니다.
+
+이 작업이 완료되면 View의 관계는 위 그림과 같은 형태로 구성됩니다.
 
 ### PageViewController에 currentPage 추가하기
-**PageViewController**에 `currentPage`라는 변수를 추가하는 것으로 시작하겠습니다. 이때 이 변수는 **@Binding** 속성으로 지정되어야 합니다. 그리고 **setViewControllers(_:direction:animated:)** 메서드를 호출하는 곳에 currentPage를 사용하도록 수정합니다.
+**PageViewController**에 `currentPage`라는 변수를 추가하는 것으로 시작하겠습니다. 이 변수는 **@Binding** 속성으로 만들어야 합니다. 그리고 **setViewControllers(_:direction:animated:)** 메서드를 호출하는 곳에서 `0`을 `currentPage`로 수정합니다.
 
 ```swift
 struct PageViewController: UIViewControllerRepresentable {
@@ -38,7 +40,7 @@ struct PageViewController: UIViewControllerRepresentable {
 ```
 
 ### UIPageViewControllerDelegate 구현하기
-PageViewController의 Coordinator는 UIPageViewDataSource만 구현되어있고, Delegate는 구현되어있지 않습니다. 현재 보여지고있는 페이지 정보를 가져오고 싶다면, **UIPageViewControllerDelegate**를 구현해야 합니다.
+PageViewController의 Coordinator는 UIPageViewDataSource만 구현되어있고, Delegate는 구현되어있지 않습니다. 현재 페이지의 위치를 가져오고 싶다면, **UIPageViewControllerDelegate**를 구현해야 합니다.
 
 아래 코드를 참고하여 Coordinator 선언부에 `UIPageViewControllerDelegate`를 추가하고, **(_:didFinishAnimating:previousViewControllers:transitionCompleted completed: Bool)** 메서드를 구현합니다.
 
@@ -66,7 +68,7 @@ pageViewController.delegate = context.coordinator
 ```
 
 ### PageView에 currentPage 추가하기
-다음으로 **PageView**에도 currentPage 변수를 추가하는데, 이때 이 변수는 **@State** 속성으로 지정되어야 합니다. 왜냐하면 이 변수가 변경될 때 마다, UIPageControl의 Page 위치를 갱신해야 하기 때문입니다.
+다음으로 **PageView**에도 currentPage 변수를 추가하는데, 이때 이 변수는 **@State** 속성으로 만들어야 합니다. 왜냐하면 이 변수가 변경될 때 마다, UIPageControl의 Page 위치를 갱신해야 하기 때문입니다.
 
 PageViewController를 초기화하는 부분에서 `$` 연산자를 사용하는 것에 주의하면서, 아래 코드를 추가합니다.
 
@@ -86,12 +88,12 @@ struct PageView<Page: View>: View {
 
 `$currentPage`를 PageViewController로 넘겨주게 되면, @Binding으로 선언 된 PageViewController의 currentPage와 서로 연결됩니다. 그럼 UIPageViewController를 스와이프하여 Page가 변경될 때 마다, **PageView**의 currentPage가 업데이트 될 것입니다.
 
-### UIPageControl을 대신하는 PageControl 만들기
+---
+
+## UIPageControl을 대신하는 PageControl 만들기
 ![section4-1](/assets/images/swift-tutorials/interfacing-with-uikit/section4-1.png){: .center-image}{: width="300"}
 
 UIKit으로 만들어진 UIPageControl을 사용하기 위해, 프로젝트에 `PageControl.swift` 라는 이름의 SwiftUI 파일을 추가합니다. 그리고 아래 코드를 참고하여 **UIViewRepresentable** 프로토콜을 따르는 **PageControl**을 추가합니다.
-
-여기서 구현된 make, update 함수는 UIViewControllerRepresentable의 것과 동일한 생명주기를 갖습니다.
 
 ```swift
 import UIKit
@@ -125,7 +127,7 @@ var body: some View {
 }
 ```
 
-이제, 페이지 뷰 컨트롤러를 좌/우로 스와이프 하면 페이지가 이동하면서 PageControl의 위치도 같이 움직이는 것을 볼 수 있습니다.
+이제, 페이지 뷰 컨트롤러를 스와이프 하면 페이지가 이동하면서 PageControl의 위치도 같이 움직이는 것을 볼 수 있습니다.
 
 ### Coodinator로 Target-Action 구현하기
 UIPageControl은 Delegate 패턴이 아닌 target-action 패턴을 사용하여 사용자의 터치 이벤트를 처리합니다. 이 패턴을 구현하는 방법은 DataSource와 Delegate를 Coordinator에 구현했던 방법과 매우 비슷합니다.
@@ -167,8 +169,14 @@ func makeUIView(context: Context) -> UIPageControl {
 }
 ```
 
-페이지뷰를 좌/우로 스와이프 해보고, PageControl의 좌/우를 터치해보세요. 이미지가 바뀌고, PageControl의 위치가 업데이트 된다면 모든 작업이 완료 된 것입니다.
+페이지뷰를 스와이프 해보고, PageControl를 터치해보세요. 이미지가 바뀌고, PageControl의 위치가 업데이트 된다면 모든 작업이 완료 된 것입니다. 🎉
 
 ![result](/assets/images/swift-tutorials/interfacing-with-uikit/result.gif){: .center-image}{: width="320"}
 
-## 결론
+## 마치며
+지금까지 2개의 글을 통해 페이지를 지원하는 View를 만들어 보았습니다. 이 과정에서 UIKit을 SwiftUI에서 사용하는 방법에 대해서도 알 수 있었고, Coordinator, State와 Binding의 사용법에 대해서도 알 수 있었습니다.
+
+그리고 Apple의 [SwiftUI Tutorial](https://developer.apple.com/tutorials/swiftui)은 SwiftUI 입문자에게 매우 큰 도움이 되기 때문에, 꼭 한번 따라해보시는 것을 추천합니다.
+
+그럼 여기서 마치겠습니다.
+읽어주셔서 감사합니다! 😉
