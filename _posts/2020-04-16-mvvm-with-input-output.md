@@ -8,18 +8,11 @@ categories: [iOS, RxSwift]
 tags: [iOS, RxSwift, MVVM]
 ---
 
-## MVVM?
-신규 서비스의 iOS 앱 개발을 담당하게 되어, 아키텍처에 대해 많은 고민을 했고 Rx+MVVM 아키텍처를 선택하게 됨
-익숙함이 가장 큰 무기인 MVC(~~Massive~~ View Controller)는 매우 효율적이지만, 유지보수 과정에서 큰 고통을 받을 것이 분명하여 탈락.
-나름의 기준으로 요즘 대세라고 생각되는 MVVM을 도입하기로 함.
-Reactive함과 Binding의 편의성을 위해 RxSwift도 같이 사용!
+신규 서비스의 iOS 앱 개발을 담당하게 되었습니다. 협업을 위해서는 어느 정도 대중적인 아키텍처가 필요했고, 팀원과의 논의를 통해 MVVM 아키텍처를 선택하게 되었습니다. 익숙함이 가장 큰 무기인 **MVC**(~~Massive~~ View Controller)는 유지보수와 확장성을 생각하면 큰 고통을 받을 것이 분명하여 제외했습니다.
 
-산타토익에서 사용하는 [**Geppetto**](https://github.com/geppetto-ios/Geppetto) 또는 [**ReactorKit**](https://github.com/ReactorKit/ReactorKit)을 사용해볼까 싶었지만, 투머치인것 같아서 일단 접어두었음.
+MVVM 아키텍처의 구현을 공부하다 보니, iOS의 MVVM은 표준(?)이 없고 구현하는 사람마다 패턴이 조금씩 다르다는 것을 알게 되었습니다. 그중에, Input과 Output Protocol을 사용하는 방식이 눈에 띄어 프로젝트에 적용해보기로 했습니다.
 
-그런데 Rx+MVVM으로 앱을 개발해본 경험이 거의 없다보니, 다른 사람들은 어떻게 하나 참고하려고 찾아봤더니,, 웬걸? 사람마다 다 다르다 ...
-이것저것 보다보니 Input과 Output Protocol을 적용한 방식이 눈에 띄었음.
-
-이 구조를 사용하여 간단한 뷰 모델을 만들어보고, 어떻게 사용하는지 알아봅시다.
+그럼 간단한 예제를 통해 Input, Output Protocol을 사용한 MVVM 아키텍처의 구현을 알아보겠습니다.
 
 ## Example
 ### Protocol with Input&Output
@@ -39,12 +32,13 @@ protocol ViewModelType {
 }
 ```
 
-뷰 모델 초기화에 필요한 데이터인 **Dependency**, 입력을 담당하는 **Input**과 출력을 담당하는 **Output**을 associatedtype으로 정의합니다.
+ViewModel의 의존성인 **Dependency**, View에서 전달되는 이벤트인 **Input**과 Input의 결과를 출력하는 **Output**을 associatedtype으로 정의합니다. associatedtype은 enum, struct, class 등의 다양한 타입으로 정의할 수 있습니다.
 
-그리고 이 프로토콜을 따르는 뷰모델을 만들어볼 차례입니다.
+그럼 이 Protocol을 사용하여 이름과 이메일 주소를 입력받고, 확인 버튼의 활성화 상태를 출력하는 ViewModel을 만들어보겠습니다.
 
 ### ViewModel
 ```swift
+import Foundation
 import RxSwift
 import RxCocoa
 
@@ -71,18 +65,22 @@ final class MyViewModel: ViewModelType {
     private let nameText$: BehaviorSubject<String?>
     private let emailText$: BehaviorSubject<String?>
 
-    init(dependency: Dependency) {
+    init(dependency: Dependency = Dependency(name: nil, email: nil)) {
         self.dependency = dependency
 
+        // Streams
         let nameText$ = BehaviorSubject<String?>(value: nil)
         let emailText$ = BehaviorSubject<String?>(value: nil)
         let isConfirmEnabled$ = Observable.combineLatest(nameText$, emailText$)
             .map(validation)
             .asDriver(onErrorJustReturn: false)
 
+        // Input & Output
         self.input = Input(nameText: nameText$.asObserver(),
                            emailText: emailText$.asObserver())
         self.output = Output(isConfirmEnabled: isConfirmEnabled$)
+
+        // Binding
         self.nameText$ = nameText$
         self.emailText$ = emailText$
     }
@@ -93,11 +91,9 @@ private func validation(name: String?, email: String?) -> Bool {
 }
 ```
 
-ViewModelType을 구현하는 뷰모델을 만들어보았습니다. 모든 스트림을 init(dependency:)에서 정의하는 모습을 볼 수 있습니다. 코드의 마지막줄에는 이름과 이메일 주소가 비어있는지 확인하는 함수가 구현되어있네요.
+이름과 이메일 입력이 Input에, 버튼 활성화 여부의 출력이 Output에 정의되어있는 것을 볼 수 있습니다. 스트림 생성과 관리는 init(dependency:)에서 담당하고 있습니다.
 
-그럼 뷰에서는 이 뷰모델을 어떻게 쓰면 되는지도 알아봐야겠죠?
-
-### View
+### View (Controller)
 ```swift
 import UIKit
 import RxSwift
@@ -109,7 +105,7 @@ final class View: UIViewController {
     private let confirmButton: UIButton = UIButton()
     
     let disposeBag = DisposeBag()
-    var viewModel: MyViewModel = MyViewModel(dependency: MyViewModel.Dependency(name: nil, email: nil))
+    var viewModel: MyViewModel = MyViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,24 +128,17 @@ final class View: UIViewController {
             .disposed(by: disposeBag)
     }
 }
-
 ```
 
+View는 textField의 text입력을 ViewModel의 input으로 전달하고, ViewModel의 output을 구독하여 화면에 반영합니다.
+
 ## 마무리
-신규 서비스의 iOS 앱 개발을 담당하게 되어, 아키텍처에 대해 많은 고민을 했고 Rx+MVVM 아키텍처를 선택하게 됨
-익숙함이 가장 큰 무기인 MVC(~~Massive~~ View Controller)는 매우 효율적이지만, 유지보수 과정에서 큰 고통을 받을 것이 분명하여 탈락.
-나름의 기준으로 요즘 대세라고 생각되는 MVVM을 도입하기로 함.
-Reactive함과 Binding의 편의성을 위해 RxSwift도 같이 사용!
+ViewModel의 Input과 Output을 통해 View와 ViewModel 간의 바인딩이 매우 간결한 것을 볼 수 있습니다. 이 구조에서는 기능의 수정 또는 추가 시, Input과 Output에 맞춰 적절한 코드를 추가해주면 됩니다. 물론 이 구조가 만능은 아닙니다. 간단한 화면은 괜찮겠지만 화면 또는 기능이 조금만 복잡해져도 스트림 관리에 신경을 많이 써야 할 것 같습니다.
 
-ReactorKit이나 산타토익에서 사용하는 Geppetto를 사용해볼까 싶었지만, 투머치인것 같아서 일단 접어두었음.
+아키텍처 후보에는 산타토익에서 사용하는 [**Geppetto**](https://github.com/geppetto-ios/Geppetto) 또는 [**ReactorKit**](https://github.com/ReactorKit/ReactorKit)도 있었지만, 신규 입사자의 Brain Heart를 고려하여 다음 기회로 미루기로 했습니다. 두 아키텍처 모두 훌륭하기 때문에 한 번쯤 알아보시는 것을 추천합니다.
 
-그런데 Rx+MVVM으로 앱을 개발해본 경험이 거의 없다보니, 다른 사람들은 어떻게 하나 참고하려고 찾아봤더니,, 웬걸? 사람마다 다 다르다 ...
-이것저것 보다보니 Input과 Output Protocol을 적용한 방식이 눈에 띄었음.
-
-이 구조를 사용하여 간단한 뷰 모델을 만들어보고, 어떻게 사용하는지 알아봅시다.
-
-
-
+이번 글은 여기서 마치겠습니다.
+읽어주셔서 감사합니다! 😆
 
 ## 참고자료
 https://github.com/geppetto-ios/Geppetto
