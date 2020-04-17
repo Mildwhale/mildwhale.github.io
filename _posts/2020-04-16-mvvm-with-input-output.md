@@ -14,7 +14,7 @@ tags: [iOS, RxSwift, MVVM]
 
 익숙함이 가장 큰 무기인 **MVC**(~~Massive~~ View Controller)는 유지보수와 확장성을 생각했을 때, 가까운 미래에 고통을 받을 것이 분명하여 제외했습니다.
 
-MVVM 아키텍처의 구현 패턴을 보다보니, `iOS MVVM은 표준이 없고 구현하는 사람마다 패턴이 조금씩 다르다`는 것을 알 수 있었습니다. 그중에, Input과 Output Protocol을 사용하는 방식이 눈에 띄어 프로젝트에 적용해보기로 했습니다.
+MVVM 아키텍처의 구현 패턴을 보다보니, `iOS MVVM은 표준이 없고 구현하는 사람마다 패턴이 조금씩 다르다`는 것을 알 수 있었습니다. 그중에, [Kickstarter](https://github.com/kickstarter/ios-oss)에서 사용하는 Input과 Output Protocol을 사용하는 방식이 눈에 띄어 프로젝트에 적용해보기로 했습니다.
 
 그럼 간단한 예제를 통해 Input, Output Protocol을 사용한 MVVM 아키텍처의 구현을 알아보겠습니다.
 
