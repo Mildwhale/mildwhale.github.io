@@ -16,6 +16,8 @@ MVVM 아키텍처의 구현 패턴을 보다보니, `iOS MVVM은 표준이 없�
 
 그럼 간단한 예제를 통해 Input, Output Protocol을 사용한 MVVM 아키텍처의 구현을 알아보겠습니다.
 
+![mvvm](/assets/images/mvvm/mvvm.jpeg){: .center-image}
+
 ## Example
 ### Protocol with Input&Output
 ```swift
