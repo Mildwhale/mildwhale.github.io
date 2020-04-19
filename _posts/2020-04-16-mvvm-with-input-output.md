@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[iOS][RxSwift] iOS의 MVVM 아키텍처는 왜 제각각일까?"
-description: "Input과 Output을 사용한 MVVM 아키텍처"
+title: "[iOS][RxSwift] Input과 Output을 사용한 MVVM 아키텍처"
+description: "iOS의 MVVM 아키텍처는 왜 제각각일까?"
 author: "kyujin.kim"
 date: 2020-04-16
 categories: [iOS, RxSwift]
