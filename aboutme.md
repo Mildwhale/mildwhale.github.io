@@ -17,7 +17,7 @@ description: iOS Software Engineer at Riiid!
 
 # **EXPERIENCE**
 ---
-### 뤼이드 
+### ‣ 뤼이드 
 #### [2019. 9 ~ 재직중]
 - **Rx+MVVM** 아키텍처와 **gRPC**를 사용하는 신규 프로젝트의 개발을 진행중입니다.  
 - **UI 테스트 병렬화**를 적용해서 테스트에 소요되는 **시간을 1/3로 단축**했습니다.  
@@ -35,7 +35,7 @@ description: iOS Software Engineer at Riiid!
 <br/>
 
 ---
-### 데일리호텔 
+### ‣ 데일리
 #### [2017. 06 ~ 2019. 08]
 - **Swift**와 **Objective-C**를 사용하여 데일리호텔 앱을 개발했습니다.  
 - **MVVM-C 아키텍처를 도입**해서 더 나은 생산성을 확보했습니다.  
@@ -45,7 +45,7 @@ description: iOS Software Engineer at Riiid!
 <br/>
 
 ---
-### 컴투스
+### ‣ 컴투스
 #### [2014. 12 ~ 2017. 05]
 - **Objective-C**를 사용하여 **모바일 게임용 SDK를 개발**했습니다.  
 - Push 알림에 이미지 또는 동영상을 활용하는 기능을 **기획, 개발**했습니다.  
@@ -55,7 +55,7 @@ description: iOS Software Engineer at Riiid!
 <br/>
 
 ---
-### 넥서스커뮤니티 
+### ‣ 넥서스커뮤니티 
 #### [2014. 06 ~ 2014. 12]
 - **Objective-C**로 업무용 메신저인 iPECS UCE 앱을 개발했습니다.  
 - 채팅 및 다이얼 화면에 AutoLayout을 적용하였습니다.  
@@ -63,7 +63,7 @@ description: iOS Software Engineer at Riiid!
 <br/>
 
 ---
-### CJ 에듀케이션즈
+### ‣ CJ 에듀케이션즈
 #### [2013. 08 ~ 2014. 03]
 - **Cocos2d-x**를 사용하여 ['나는생각 한글'](https://www.youtube.com/watch?v=0GNEoqaUevs), ['나는생각 영어'](https://www.youtube.com/watch?v=Yjl8Pceo0Zs)를 개발했습니다.
 - 앱 로직은 **C++**, 네이티브 기능은 **Objective-C, Java**를 사용해 개발했습니다.
