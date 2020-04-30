@@ -20,6 +20,8 @@ tags: [iOS, RxSwift, MVVM]
 ## Example
 ---
 ### Protocol with Input&Output
+ViewModel의 의존성인 **Dependency**, View에서 전달되는 이벤트인 **Input**과 Input의 결과를 출력하는 **Output**을 associatedtype으로 정의합니다.
+
 ```swift
 protocol ViewModelType {
     associatedtype Dependency
@@ -35,10 +37,8 @@ protocol ViewModelType {
     init(dependency: Dependency)
 }
 ```
-
-ViewModel의 의존성인 **Dependency**, View에서 전달되는 이벤트인 **Input**과 Input의 결과를 출력하는 **Output**을 associatedtype으로 정의합니다.
-
-그럼 이 Protocol을 사용하여 이름과 이메일 주소를 입력받고, 확인 버튼의 활성화 상태를 출력하는 ViewModel을 만들어보겠습니다.
+그럼 이 Protocol을 사용하여 이름과 이메일 주소를 입력받고, 확인 버튼의 활성화 상태를 출력하는 ViewModel을 만들어보겠습니다.  
+<br/>
 
 ### ViewModel
 ```swift
@@ -94,8 +94,8 @@ private func validation(name: String?, email: String?) -> Bool {
     return name?.isEmpty == false && email?.isEmpty == false
 }
 ```
-
-이름과 이메일 입력이 Input에, 버튼 활성화 여부의 출력이 Output에 정의되어있는 것을 볼 수 있습니다. 스트림 생성과 관리는 init(dependency:)에서 담당하고 있습니다.
+이름과 이메일 입력이 Input에, 버튼 활성화 여부의 출력이 Output에 정의되어있는 것을 볼 수 있습니다. 스트림 생성과 관리는 init(dependency:)에서 담당하고 있습니다.  
+<br/>
 
 ### View (Controller)
 ```swift
@@ -133,20 +133,23 @@ final class View: UIViewController {
     }
 }
 ```
-
-View는 textField의 text입력을 ViewModel의 input으로 전달하고, ViewModel의 output을 구독하여 화면에 반영합니다.
+View는 textField의 text입력을 ViewModel의 input으로 전달하고, ViewModel의 output을 구독하여 화면에 반영합니다.  
+<br/>
 
 ## 마무리
-ViewModel의 Input과 Output을 통해 View와 ViewModel 간의 바인딩이 매우 간결한 것을 볼 수 있습니다. 이 아키텍처는 기능의 수정 또는 추가 시, Input과 Output에 맞춰 적절한 변수를 선언해주면 됩니다. Input과 Output을 protocol로 선언하면 공통적으로 사용할 수 있는 뷰모델을 만들 수도 있습니다.
+---
+ViewModel의 Input과 Output을 통해 View와 ViewModel 간의 바인딩이 매우 간결한 것을 볼 수 있습니다. 기능의 수정 또는 추가 시, Input과 Output에 맞춰 적절한 변수를 선언해주면 됩니다. 
 
 물론 이 구조가 만능은 아닙니다. 화면 또는 기능이 복잡해질수록 늘어나는 스트림 관리에 신경을 많이 써야 하며, ViewModel이 비대해질 가능성이 매우 큽니다. 이러한 이유 때문에 MVVM이 다양한 형태의 구현을 가지고 있는게 아닐까 싶네요. 😥
 
 아키텍처 후보에는 산타토익에서 사용하는 [**Geppetto**](https://github.com/geppetto-ios/Geppetto) 또는 [**ReactorKit**](https://github.com/ReactorKit/ReactorKit) 같은 단방향 아키텍처도 있었지만, 대중성을 고려하여 다음 기회로 미루기로 했습니다. 하지만, 단방향 아키텍처는 매우 효율적이니 한 번쯤 알아보시는 것을 추천합니다.
 
 이번 글은 여기서 마치겠습니다.  
-읽어주셔서 감사합니다! 😆
+읽어주셔서 감사합니다! 😆  
+<br/>
 
 ## 참고자료
-- http://minsone.github.io/programming/better-mvvm-architecture-from-kickstarter-oss
-- https://github.com/kickstarter/ios-oss
-- https://benoitpasquier.com/rxswift-mvvm-alternative-structure-for-viewmodel/
+---
+- [http://minsone.github.io/programming/better-mvvm-architecture-from-kickstarter-oss](http://minsone.github.io/programming/better-mvvm-architecture-from-kickstarter-oss)
+- [https://github.com/kickstarter/ios-oss](https://github.com/kickstarter/ios-oss)
+- [https://benoitpasquier.com/rxswift-mvvm-alternative-structure-for-viewmodel/](https://benoitpasquier.com/rxswift-mvvm-alternative-structure-for-viewmodel/)
