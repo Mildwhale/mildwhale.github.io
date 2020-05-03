@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[iOS] gRPC Swift 입문기"
+title: "[iOS] gRPC의 사용법 알아보기"
 description: "gRPC를 Xcode에서 사용하는 방법"
 author: "kyujin.kim"
 date: 2020-05-01
