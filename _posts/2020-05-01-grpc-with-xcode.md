@@ -46,7 +46,7 @@ protoc echo.proto --swift_out=. --grpc-swift_out=.
 다음으로 Xcode 프로젝트를 열고 SPM 의존성에 `grpc-swift`를 추가합니다. 그리고 위에서 컴파일했던 echo.*.swift 파일들을 프로젝트에 추가하고, Build를 눌러 설정이 잘 되었는지 확인해봅니다. 설정이 잘 되었다면 빌드가 성공해야 합니다.  
 <br/>
 
-## Trouble Shooting
+## Troubleshooting
 ---
 ### 파일명 중복
 protoc는 proto파일의 이름을 기준으로 swift파일을 생성하기 때문에, 같은 이름의 swift파일이 존재할 수 있습니다. swift파일의 이름이 같으면 Xcode의 빌드가 되지 않을 수 있는데, 다행히도 protoc 플러그인은 이런 문제를 해결할 수 있는 옵션을 제공합니다.
@@ -57,7 +57,7 @@ protoc echo.proto --swift_out=. --grpc-swift_out=. --swift_opt=FileNaming=PathTo
 `--swift_opt=FileNamin=PathToUnderscores` 옵션은 변환되는 파일의 이름에 해당 proto 파일이 위치한 경로를 언더스코어로 구분하여 추가해줍니다. 예를 들어 아무런 옵션이 없을 때 파일명이 `echo.pb.swift` 였다면, 위 옵션을 추가했을 때는 `a_b_echo.pb.swift`와 같은 형태가 된다는 것입니다.
 <br/>
 
-### import "#path#" was not found
+### import "/some/filepath" was not found
 proto파일은 다른 proto파일을 import 할 수 있습니다. 따라서 import 한 파일을 찾을 수 없는 경우, 컴파일이 되지 않습니다. 이럴 때에는 `--proto_path`를 추가하고 proto파일의 최상위 경로를 지정하면 해결할 수 있습니다.
 ```
 protoc echo.proto --swift_out=. --grpc-swift_out=. --proto_path=/protoc-service-repo/protobuf
