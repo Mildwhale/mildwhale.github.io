@@ -10,7 +10,7 @@ tags: [iOS, gRPC]
 
 이 글은 gRPC를 Xcode에서 사용하기 위해 겪었던 삽질을 기록하고 공유하기 위해 작성되었습니다. gRPC의 이론적인 내용은 따로 소개하지 않을 것이니 궁금하신 분은 [gRPC.io](https://grpc.io)를 참고해주세요.
 
-![grpc-logo](/Assets/images/grpc/grpc-icon-color.png){: width="400"}{: .center-image}  
+![grpc-logo](/assets/images/grpc/grpc-icon-color.png){: width="400"}{: .center-image}  
 <br/>
 
 ## 컴파일러와 플러그인 설치
