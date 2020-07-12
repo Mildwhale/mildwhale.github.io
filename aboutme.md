@@ -8,8 +8,6 @@ description: iOS Software Engineer
 
 # **김규진 (Kyujin Kim)**
 ---
-꼼꼼한 성격으로 서비스의 안정성을 중요하게 생각하며, 사용자에게 더 좋은 서비스를 제공하기 위해 끊임없이 노력하는 개발자입니다. 꾸준히 자기 계발을 하고 있으며, 개발 경험과 지식을 블로그에 기록하고 공유합니다.  
-
 **Email** <mailto:mildwhale@gmail.com>  
 **Github** [https://github.com/Mildwhale](https://github.com/Mildwhale)  
 **Blog** [https://mildwhale.github.io](https://mildwhale.github.io)  
@@ -17,8 +15,14 @@ description: iOS Software Engineer
 
 # **EXPERIENCE**
 ---
+### ‣ 크로키닷컴
+#### [2020. 6 ~ 재직중]
+- **지그재그** iOS 서비스 개발 및 유지 보수를 담당하고 있습니다.  
+<br/>
+
+---
 ### ‣ 뤼이드 
-#### [2019. 9 ~ 재직중]
+#### [2019. 9 ~ 2020. 6]
 - **Rx+MVVM** 아키텍처와 **gRPC**를 사용하는 신규 프로젝트의 개발을 진행중입니다.  
 - **UI 테스트 병렬화**를 적용해서 테스트에 소요되는 **시간을 1/3로 단축**했습니다.  
 - **릴리즈 체크리스트를 자동화** 하여 개발자의 리소스를 확보했습니다.  
