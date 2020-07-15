@@ -27,13 +27,13 @@ tags: [iOS, UIImage, ImageIO, Memory]
 
 ![after-decoding](/assets/images/downsampling/after-decoding.PNG){: width="600"}{: .center-image}
 
-그렇다면 작은 크기의 이미지와, 필요한 색 영역을 사용하면 메모리를 절약할 수 있지 않을까요? 이제부터 그 방법을 알아보러 가시죠.  
+큰 이미지를 처리하는 데에는 CPU와 메모리가 많이 사용됩니다. CPU와 메모리의 점유율이 높아지면, UI를 처리하기 위한 자원이 부족하게 되어 앱이 버벅거리게 되고, 배터리도 더 많이 사용하게 됩니다. 결국 우리 앱은 삭제당하겠죠... 😭
+
+그렇다면 작은 크기의 이미지와, 필요한 색 영역을 사용하면 자원을 절약할 수 있지 않을까요? 이제부터 그 방법을 알아보러 가시죠.  
 <br/>
 
 ### 리사이징
-위에서 언급했던 것처럼 이미지가 차지하는 메모리는 이미지 픽셀 크기에 비례합니다. 큰 이미지일수록 픽셀의 정보가 많아지기 때문에 당연한 거겠죠? 
-
-아래 그림은 이미지 리사이즈를 거치기 전의 이미지 파이프라인입니다. 이미지 버퍼에는 원본 이미지의 데이터가 그대로 들어가 있는데, 이미지 뷰의 크기가 다소 작네요. 어찌 됐든 이미지 뷰의 크기에 맞게 그려지긴 하겠지만 불필요하게 많은 메모리를 소모하게 됩니다.
+아래 그림은 이미지 리사이즈를 거치기 전의 이미지 파이프라인입니다. 이미지 버퍼에는 원본 이미지의 데이터가 그대로 들어가 있는데, 이미지 뷰의 크기가 다소 작네요. 어찌 됐든 이미지 뷰의 크기에 맞게 그려지긴 하겠지만 불필요하게 많은 메모리를 사용하게 됩니다.
 
 ![render-before-downsampling](/assets/images/downsampling/render-before-downsampling.PNG){: .center-image}
 
@@ -41,9 +41,9 @@ tags: [iOS, UIImage, ImageIO, Memory]
 
 ![render-after-downsampling](/assets/images/downsampling/render-after-downsampling.PNG){: .center-image}
 
-이렇게 적절한 크기로 리사이즈만 해줘도 메모리를 많이 절약할 수 있습니다. 이미지 리사이즈는 [Image I/O](https://developer.apple.com/documentation/imageio)를 사용합니다.
+이렇게 적절한 크기로 리사이즈만 해줘도 메모리를 많이 절약할 수 있습니다. 이미지 리사이즈는 [Image I/O](https://developer.apple.com/documentation/imageio)를 사용합니다. 
 
-샘플 코드와 함께 리사이즈에 대한 설명을 마무리하고, 색 영역에 대해서 알아보겠습니다.
+아래 샘플 코드는 이미지 데이터를 기반으로 리사이즈된 이미지(섬네일)를 생성하는 코드입니다. 여러 가지 옵션이 있으니 [레퍼런스](https://developer.apple.com/documentation/imageio/cgimagesource/image_source_option_dictionary_keys)를 꼭 확인해보는 것을 추천합니다.
 
 ```swift
 func downsample(imageAt imageURL: URL, to pointSize: CGSize, scale: CGFloat) -> UIImage {
@@ -57,17 +57,19 @@ func downsample(imageAt imageURL: URL, to pointSize: CGSize, scale: CGFloat) -> 
     let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions)!
     return UIImage(cgImage: downsampledImage)
 }
-```  
+```
+
+이쯤에서 리사이즈에 대한 설명을 마무리하고, 색 영역에 대해서 알아보겠습니다.  
 <br/>
 
 ### 색 영역(Color Space)
-이미지에는 색 영역이라는 개념이 있고, 아래 사진과 같이 색 영역에 따라 메모리의 점유율이 달라집니다. 앱 개발 시 보통 SRGB format을 사용하며, 최근 출시된 애플의 기기에서는 Wide format도 사용됩니다.
+이미지에는 색 영역이라는 개념이 있고, 아래 사진과 같이 색 영역에 따라 메모리 사용량이 달라집니다. 앱 개발 시 보통 SRGB format을 사용하며, 최근 출시된 애플의 기기에서는 Wide format도 사용됩니다.
 
 ![color-space](/assets/images/downsampling/color-space.PNG){: width="600"}{: .center-image}
 
 다양한 색 영역 중 적절한 포맷을 선택하기 위해 Apple에서는 iOS 10에서 **UIGraphicsImageRenderer**를 추가했습니다. 항상 SRGB 포맷을 사용하던 **UIGraphicsBeginImageContextWithOptions**대신 사용할 수 있습니다.
 
-아래 코드는 **UIGraphicsBeginImageContextWithOptions**를 사용해 원을 그리는 코드입니다. **black Color**만 사용하고 있는데, SRGB 포맷으로 이미지를 생성하면 불필요하게 많은 메모리를 사용할 것만 같습니다.
+아래 코드는 **UIGraphicsBeginImageContextWithOptions**를 사용해 원을 그리는 코드입니다. **black Color**만 사용하고 있는데, SRGB 포맷으로 이미지를 생성하면 불필요하게 많은 메모리를 사용하게 됩니다.
 
 ```swift
 let bounds = CGRect(x: 0, y: 0, width:300, height: 100)
@@ -101,14 +103,12 @@ let image = renderer.image { context in
 }
 ```
 
-**UIGraphicsImageRenderer**는 **black Color**만 사용한다는 것을 알아채고 적절한 색 영역을 선택해서 우리의 메모리를 절약해줄겁니다. 앞으로는 **UIGraphicsBeginImageContextWithOptions** 대신 **UIGraphicsImageRenderer**를 사용하는 습관을 들여야 겠습니다.  
+**UIGraphicsImageRenderer**는 **black Color**만 사용한다는 것을 알아채고 적절한 색 영역을 선택해서 우리의 메모리를 절약해줄 겁니다. 앞으로는 **UIGraphicsBeginImageContextWithOptions** 대신 **UIGraphicsImageRenderer**를 사용하는 습관을 들여야겠습니다.
 <br/>
 
 ## 마무리
 ---
-이 글은 아래 링크된 WWDC 세션을 바탕으로 작성되었습니다. 이 글에서 소개하지 않았지만 알아두면 매우 유용한 시스템의 메모리 관리 방법과, 부드러운 스크롤링을 위한 꿀팁이 있으니 꼭 한번 보시는 것을 추천합니다. 👍
-
-읽어주셔서 감사합니다 😁  
+이 글은 아래 링크된 WWDC 세션을 바탕으로 작성되었습니다. 이 글에서 소개하지 않았지만 알아두면 매우 유용한 시스템의 메모리 관리 방법과, 부드러운 스크롤링을 위한 꿀팁이 있으니 꼭 한번 보시는 것을 추천합니다. 👍  
 <br/>
 
 ## 참고자료
