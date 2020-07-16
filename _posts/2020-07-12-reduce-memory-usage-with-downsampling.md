@@ -5,7 +5,7 @@ description: "UIGraphicsImageRenderer & Image I/O"
 author: "kyujin.kim"
 date: 2020-07-12
 categories: [iOS]
-bigimg: assets/images/downsampling/render-after-downsampling.png
+bigimg: assets/images/downsampling/title.png
 tags: [iOS, UIImage, ImageIO, Memory]
 ---
 
