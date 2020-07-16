@@ -5,6 +5,7 @@ description: "UIGraphicsImageRenderer & Image I/O"
 author: "kyujin.kim"
 date: 2020-07-12
 categories: [iOS]
+bigimg: assets/images/downsampling/render-after-downsampling.png
 tags: [iOS, UIImage, ImageIO, Memory]
 ---
 
@@ -103,7 +104,7 @@ let image = renderer.image { context in
 }
 ```
 
-**UIGraphicsImageRenderer**는 **black Color**만 사용한다는 것을 알아채고 적절한 색 영역을 선택해서 우리의 메모리를 절약해줄 겁니다. 앞으로는 **UIGraphicsBeginImageContextWithOptions** 대신 **UIGraphicsImageRenderer**를 사용하는 습관을 들여야겠습니다.
+**UIGraphicsImageRenderer**는 **black Color**만 사용한다는 것을 알아채고 적절한 색 영역을 선택해서 우리의 메모리를 절약해줄 겁니다. 앞으로는 **UIGraphicsBeginImageContextWithOptions** 대신 **UIGraphicsImageRenderer**를 사용하는 습관을 들여야겠습니다.  
 <br/>
 
 ## 마무리
