@@ -18,6 +18,7 @@ description: iOS Software Engineer
 ### ‣ 크로키닷컴
 #### [2020. 6 ~ 재직중]
 - **지그재그** iOS 서비스 개발 및 유지 보수를 담당하고 있습니다.
+- Bitrise를 활용해 CI/CD 환경을 구축했습니다.
 - PhotoKit과 Image I/O를 사용하여 리뷰 사진첨부 기능을 구현했습니다.  
 <br/>
 
