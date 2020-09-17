@@ -1,18 +1,18 @@
 ---
 layout: post
 title: "[iOS][RxSwift] Input과 Output을 사용한 MVVM 아키텍처"
-description: "iOS의 MVVM 아키텍처는 왜 제각각일까?"
+description: "Kickstarter의 MVVM 응용편"
 author: "kyujin.kim"
 date: 2020-04-16
 categories: [iOS, RxSwift]
 tags: [iOS, RxSwift, MVVM]
 ---
 
-뤼이드에서 신규 서비스의 iOS 앱 개발을 담당하게 되어, 아키텍처에 대한 고민을 하게 되었습니다. 협업을 위해서는 어느 정도 대중적인 아키텍처가 필요했는데, 익숙함이 가장 큰 무기인 **MVC**(~~Massive~~ View Controller)는 유지보수와 확장성을 생각했을 때, 유지 보수에 고통을 받을 것이 분명하여 제외했습니다.
+뤼이드에서 신규 서비스의 iOS 앱 개발을 담당하게 되어, 아키텍처에 대한 고민을 하게 되었습니다. 협업을 위해서는 어느 정도 대중적인 아키텍처가 필요했는데, 익숙함이 가장 큰 무기인 **MVC**(~~Massive~~ View Controller)는 유지보수와 확장성을 생각했을 때, 미래에 큰 고통을 받을 것이 분명하여 제외했습니다.
 
 ![mvvm](/assets/images/mvvm/mvvm.jpeg){: .center-image}
 
-팀원과의 긴 논의를 통해 MVVM 아키텍처를 선택하게 되었고, 다양한 구현 패턴을 보며 학습을 하던 중 `iOS MVVM은 표준이 없고 구현하는 사람마다 패턴이 조금씩 다르다`는 것을 알게 되었습니다. 그중에, [Kickstarter](https://github.com/kickstarter/ios-oss)에서 사용하는 Input과 Output Protocol을 사용하는 방식이 눈에 띄어 프로젝트에 적용해보기로 했습니다.
+팀원과의 긴 논의를 통해 MVVM 아키텍처를 선택하게 되었고, 다양한 구현 패턴을 보며 학습을 하던 중 `iOS MVVM은 표준이 없고 구현하는 사람마다 패턴이 조금씩 다르다`는 것을 알게 되었습니다. 그중에, [Kickstarter](https://github.com/kickstarter/ios-oss)에서 사용하는 Input과 Output Protocol을 사용하는 방식에 영감을 받아 신규 프로젝트에 적용해보기로 했습니다.
 
 그럼 간단한 예제를 통해 Input, Output Protocol을 사용한 MVVM 아키텍처의 구현을 알아보겠습니다.  
 <br/>
@@ -94,7 +94,21 @@ private func validation(name: String?, email: String?) -> Bool {
     return name?.isEmpty == false && email?.isEmpty == false
 }
 ```
-이름과 이메일 입력이 Input에, 버튼 활성화 여부의 출력이 Output에 정의되어있는 것을 볼 수 있습니다. 스트림 생성과 관리는 init(dependency:)에서 담당하고 있습니다.  
+이름과 이메일 입력이 Input에, 버튼 활성화 여부의 출력이 Output에 정의되어있는 것을 볼 수 있습니다. 스트림 생성과 관리는 init(dependency:)에서 담당하고 있습니다.
+
+init에서 스트림을 관리하는 것이 복잡하거나 다소 부담스럽다면, 아래와 같은 방식으로 구현하는 것도 괜찮습니다.
+```swift
+final class MyViewModel: ViewModelType {
+    .
+    .
+    .
+
+    func bind(input: Input) -> Output {
+        // TODO: bind
+        // View에서 Output을 Bind하기 전에 호출합니다.
+    }
+}
+```
 <br/>
 
 ### View (Controller)
