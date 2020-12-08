@@ -57,7 +57,8 @@ description: iOS Software Engineer
 - Push 알림에 이미지 또는 동영상을 활용하는 기능을 **기획, 개발**했습니다.  
 - 광고, 이벤트 배너 화면에 **AutoLayout을 적용**했습니다.  
 - SDK 적용 가이드 문서와 테스트 케이스를 작성했습니다.  
-- **C#**을 사용하여 **Unity 플러그인을 개발**했습니다.  
+- **C#**을 사용하여 **Unity 플러그인을 개발**했습니다.
+<!---
 <br/>
 
 ---
@@ -75,3 +76,4 @@ description: iOS Software Engineer
 - 앱 로직은 **C++**, 네이티브 기능은 **Objective-C, Java**를 사용해 개발했습니다.
 - **C++과 Java(JNI)**를 사용하여 iOS, Android의 플러그인을 개발했습니다.
 - 다양한 해상도를 지원하기 위한 기능을 개발했습니다.
+--->
