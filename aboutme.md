@@ -20,6 +20,8 @@ description: iOS Software Engineer
 - **지그재그** iOS 서비스 개발 및 유지 보수를 담당하고 있습니다.
 - Bitrise를 활용해 CI/CD 환경을 구축했습니다.
 - PhotoKit과 Image I/O를 사용하여 리뷰 사진첨부 기능을 구현했습니다.  
+- Github Actions를 활용해 CI/CD 환경을 구축했습니다.  
+- 사용자 데이터를 서버와 연동하기 위한 개발을 담당하고 있습니다.  
 <br/>
 
 ---
@@ -31,7 +33,7 @@ description: iOS Software Engineer
 - 다양한 UI 컴포넌트와 애니메이션이 구현된 **공통 모듈**을 개발했습니다.  
 - **다크모드 지원**을 위한 기능을 개발하여 **디자인 시스템에 적용**했습니다.  
 - 산타토익 앱의 Crash를 해결하여 안정성을 끌어올렸습니다.  
-- 빌드 머신에 **Azure CI를 연동**해본 경험이 있습니다.  
+- Microsoft의 **Azure Pipeline**을 활용해 빌드 머신을 구축해본 경험이 있습니다.  
 <br/>
 
 #### 블로그 포스트
