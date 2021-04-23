@@ -16,7 +16,7 @@ tags: [M1, Github Actions, CI/CD, Self-hosted]
 
 회사가 폭풍 성장하는 모습을 보니, 앞으로 이런 문제가 더 자주 발생할 것 같다는 확신이 들어, 성능 좋은 **로컬 빌드머신**이라는 약을 팔았고, 그것이 잘 팔려서(?) 오랜만에 글을 쓰게 됐습니다. 
 
-![plan](/assets/images/build-machine-m1/plan.jpg){: width="500"}{: .center-image}
+![plan](/assets/images/build-machine-m1/plan.jpg){: width="600"}{: .center-image}
 <center>네, 저는 다 계획이 있었습니다 😈</center>
 
 ---
@@ -49,11 +49,11 @@ LoadError - dlsym(0x7f8926035eb0, Init_ffi_c): symbol not found - /Library/Ruby/
 
 ---
 
-## 빌드 머신과 Github Actions 연결하기
-빌드 머신의 준비가 완료되었다면, 이제 Github Actions와 연결 할 차례입니다.  
+## Github Actions에 빌드 머신 등록하기
+빌드 머신의 기본 설정이 완료되었다면, 이제 Github Actions에 등록 할 차례입니다.  
 Action을 사용 할 Repository의 `Settings` 메뉴로 진입합니다.
 
-![settings](/assets/images/build-machine-m1/settings.png){: width="500"}{: .center-image}
+![settings](/assets/images/build-machine-m1/settings.png){: width="600"}{: .center-image}
 
 Settings 화면의 왼쪽 사이드바에 있는 `Actions` 메뉴를 선택합니다.
 
@@ -61,30 +61,31 @@ Settings 화면의 왼쪽 사이드바에 있는 `Actions` 메뉴를 선택합�
 
 Actions 화면 제일 아래에 있는 `Add Runner` 버튼을 누릅니다.
 
-![add-runner](/assets/images/build-machine-m1/add-runner.png){: width="500"}{: .center-image}
+![add-runner](/assets/images/build-machine-m1/add-runner.png){: width="600"}{: .center-image}
 
 macOS와 X64 Architecture를 선택합니다.
 
 ![os-arch](/assets/images/build-machine-m1/os-arch.png){: .center-image}
 
-마지막으로, 빌드 머신의 터미널을 열고 `Download`와 `Configure`항목에 있는 쉘 스크립트를 순서대로 실행합니다.  
+마지막으로, 빌드 머신의 터미널을 열고 `Download`와 `Configure`항목에 있는 쉘 스크립트를 순서대로 실행합니다.
+
 `config.sh` 스크립트를 실행하면, 아래 이미지와 같이 설정 값을 입력할 수 있는 프롬프트가 보일겁니다. 구분하기 쉬운 이름을 입력하고 Enter. (⚠️ 이름은 수정이 불가능합니다 ⚠️)
 
-![install](/assets/images/build-machine-m1/install.png){: width="500"}{: .center-image}
+![install](/assets/images/build-machine-m1/install.png){: width="600"}{: .center-image}
 
 다음은, 빌드 머신을 분류할 수 있는 라벨을 입력하는 과정 입니다. 라벨은 언제든 수정할 수 있으니 일단 Enter.
 
-![label](/assets/images/build-machine-m1/label.png){: width="500"}{: .center-image}
+![label](/assets/images/build-machine-m1/label.png){: width="600"}{: .center-image}
 
 마지막으로, 소스코드를 체크아웃 할 경로를 지정해줍니다. 기본값을 사용하거나, 원하는 경로를 지정한 후 Enter를 누르면, 설정이 저장되었다는 메시지를 볼 수 있습니다.
 
-![finish](/assets/images/build-machine-m1/finish.png){: width="500"}{: .center-image}
+![finish](/assets/images/build-machine-m1/finish.png){: width="600"}{: .center-image}
 
-Github과 빌드 머신의 연결이 잘 됐는지 확인하기 위해, 다시 Actions 메뉴로 진입하여, 하단의 `Self-hosted runners` 항목을 확인해봅시다.
+Github Actions에 빌드 머신 등록이 잘 됐는지 확인하기 위해, 다시 Actions 메뉴로 진입하여, 화면 하단의 `Self-hosted runners` 항목을 확인해봅시다.
 
-![runners](/assets/images/build-machine-m1/runners.png){: width="500"}{: .center-image}
+![runners](/assets/images/build-machine-m1/runners.png){: width="600"}{: .center-image}
 
-조금전에 등록한 빌드 머신이 idle 상태로 보이면 성공적으로 연결이 된 것 입니다 🎉
+조금전에 등록한 빌드 머신이 idle 상태로 보이면 성공적으로 등록이 된 것 입니다 🎉
 
 ---
 
