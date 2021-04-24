@@ -12,15 +12,15 @@ tags: [M1, Github Actions, CI/CD, Self-hosted]
 
 그러던 어느 날, 몇 시간이 지나도 테스트용 빌드가 배포되지 않아 빌드 대기열을 열어보았더니, 수많은 테스트와 빌드들이 자신의 차례를 기다리고 있는 것을 목격하게 되었습니다.  
 
-배포가 제대로 되지 않아, 테스트 일정에 영향을 주기도 했고, 개발자 개인 맥북으로 배포하는 좋지 않은 상황도 종종 발생했습니다.
+![waiting](https://media.giphy.com/media/l2SqdshrUqCFMEZkk/giphy.gif){: width="400"}{: .center-image}
 
-회사가 폭풍 성장하는 모습을 보니, 앞으로 이런 문제가 더 자주 발생할 것 같다는 확신이 들어, 성능 좋은 **로컬 빌드 머신**이라는 약을 팔았고, 그것이 잘 팔려서(?) 오랜만에 글을 쓰게 됐습니다. 
+배포가 제때 되지 않으니, 개발자 개인 맥북으로 배포하는 좋지 않은 상황도 종종 발생했고, 테스트 일정에 영향을 주기도 했습니다 😵
 
-> 이 글을 끝까지 읽고 따라오시면, 1시간이 걸리던 배포를 15분으로 단축시킨 마법을 함께 경험하실 수 있습니다 😎
+회사가 폭풍 성장하는 모습을 보니, 앞으로 이런 문제가 더 자주 발생할 것 같다는 확신이 들어, 성능 좋은 **로컬 빌드 머신**이라는 약을 팔았고, ~~그것이 잘 팔려서~~ 오랜만에 글을 쓰게 됐습니다. 
 
 ![plan](/assets/images/build-machine-m1/plan.jpg){: width="600"}{: .center-image}
-<center>네, 저는 계획이 다 있었습니다 😏</center>
 
+> 이 글을 끝까지 읽고 따라오시면, 1시간이 걸리던 배포를 15분으로 단축시킨 마법을 함께 경험하실 수 있습니다 😎
 
 ---
 
@@ -45,9 +45,9 @@ LoadError - dlsym(0x7f8926035eb0, Init_ffi_c): symbol not found - /Library/Ruby/
 ```
 하지만, 이 에러는 터미널을 [Rosetta로 실행](https://support.apple.com/ko-kr/HT211861)하고, 아래 명령어를 입력하면 간단하게 해결할 수 있습니다.
 ```shell
-> sudo gem install cocoapods
-> sudo gem install ffi
-> pod install # 성공 🎉
+sudo gem install cocoapods
+sudo gem install ffi
+pod install # 성공 🎉
 ```
 
 ---
@@ -82,7 +82,7 @@ macOS와 X64 Architecture를 선택합니다.
 
 마지막으로, 소스코드를 체크아웃할 경로를 지정해줍니다. 기본값을 사용하거나, 원하는 경로를 지정한 후 Enter를 누르면, 설정이 저장되었다는 메시지를 볼 수 있습니다.
 
-![finish](/assets/images/build-machine-m1/finish.png){: width="600"}{: .center-image}
+![finish](/assets/images/build-machine-m1/finish.png){: width="400"}{: .center-image}
 
 Github Actions에 빌드 머신 등록이 잘 됐는지 확인하기 위해, 다시 Actions 메뉴로 진입하여, 화면 하단의 `Self-hosted runners` 항목을 확인해봅시다.
 
@@ -101,33 +101,9 @@ Repository의 Actions 메뉴로 진입해서 `New workflow` 버튼을 누릅니�
 
 ![setup-workflow](/assets/images/build-machine-m1/setup-workflow.jpg){: width="600"}{: .center-image}
 
-이렇게 웹 에디터로 워크플로우를 작성할 수도 있고, Repository Root 경로의 `/.github/workflows`에 파일을 직접 추가할 수도 있으니, 편한 방법으로 하면 됩니다.
+이렇게 웹 에디터로 워크플로우를 작성할 수도 있고, Repository Root 경로의 `.github/workflows`에 파일을 직접 추가할 수도 있으니, 편한 방법으로 하면 됩니다.
 
----
-
-Github에서 아래와 같은 다양한 [샘플 소스](https://github.com/actions/starter-workflows/blob/main/ci/swift.yml)를 제공하고 있습니다. 그리고, [Documents](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)를 참고하여 다양한 액션을 구현할 수 있습니다.
-```yaml
-name: Swift # 워크플로우의 이름
-
-on:
-  push: # 브랜치에 Push 수행 시 액션 실행 조건
-    branches: [ $default-branch ]
-  pull_request: # PR이 만들어졌을 때 액션 실행 조건
-    branches: [ $default-branch ]
-
-jobs:
-  build:
-    # 워크플로우를 실행 할 머신, 이곳에 Label을 입력할 수 있고
-    # []로 여러개의 라벨을 지정할 수 있음
-    runs-on: macos-latest
-
-    steps: # 워크플로우의 실제 동작
-    - uses: actions/checkout@v2 # 소스 체크아웃
-    - name: Build
-      run: swift build -v # 빌드
-    - name: Run tests
-      run: swift test -v # 테스트
-```
+> Github에서 다양한 [샘플 소스](https://github.com/actions/starter-workflows/blob/main/ci/swift.yml)를 볼 수 있고, [Documents](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)를 참고하면 원하는 액션을 구현할 수 있습니다.
 
 ### 유닛 테스트
 유닛 테스트는 fastlane의 `scan` 명령어로 간단히 실행할 수 있습니다. 웹 에디터에서 새로운 워크플로우를 생성하고, 아래와 같이 워크플로우를 작성합니다.
@@ -194,11 +170,13 @@ jobs:
 
 유닛 테스트 때와 특히 다른 점은, `workflow_dispatch`라는 조건이 추가되었다는 것입니다. 어떤 것이 다른지 확인해보기 위해 Actions 메뉴로 진입하고, Upload To Testflight 워크플로우를 선택합니다.
 
+![workflows](/assets/images/build-machine-m1/workflows.png){: .center-image}
+
 화면 우측에 `run-workflow`라는 버튼이 보이네요? 😲 궁금하니깐 한번 눌러봐야겠네요.
 
 ![run-workflow](/assets/images/build-machine-m1/run-workflow.png){: .center-image}
 
-여기까지 왔으니 브랜치를 선택하고, `Run workflow` 버튼도 눌러봐야겠죠? 😎
+브랜치를 선택하고, `Run workflow` 버튼도 눌러봐야겠죠?
 
 ![use-workflow-from](/assets/images/build-machine-m1/use-workflow-from.png){: .center-image}
 
@@ -211,7 +189,7 @@ jobs:
 ---
 
 ## 마무리
-그동안 지그재그 iOS 앱을 기준으로, 비트라이즈 Cloud 환경에서 앱 테스트는 `20분`, 배포는 `60분` 정도가 소요됐는데, M1 맥미니를 사용하니 테스트는 `3분`, 배포는 `15분`으로 단축되었습니다 🎉
+그동안 지그재그 iOS 앱을 기준으로, **비트라이즈 Cloud 환경**에서 앱 테스트는 `20분`, 배포는 `60분` 정도가 소요됐는데, **M1 맥미니**를 사용하니 테스트는 `3분`, 배포는 `15분`으로 단축되었습니다 🎉
 
 ![gaebi](/assets/images/build-machine-m1/gaebi.png){: width="400"}{: .center-image}
 
