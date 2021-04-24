@@ -86,11 +86,13 @@ Github Actions에 빌드 머신 등록이 잘 됐는지 확인하기 위해, 다
 
 ![runners](/assets/images/build-machine-m1/runners.png){: width="600"}{: .center-image}
 
-조금 전에 등록한 빌드 머신이 idle 상태로 보이면 성공적으로 등록이 된 것입니다 🎉
+조금 전에 등록한 빌드 머신이 **idle** 상태로 보이면 등록이 된 것입니다 🎉
 
 ---
 
 ## Workflow 작성하기
+Github Actions에 빌드 머신을 등록했으니, 간단한 워크플로우를 통해 잘 동작하는지 확인을 해봐야겠죠? 💪
+
 Repository의 Actions 메뉴로 진입해서 `New workflow` 버튼을 누릅니다.
 
 ![new-workflow](/assets/images/build-machine-m1/new-workflow.png){: .center-image}
@@ -134,8 +136,7 @@ jobs:
 ![running](/assets/images/build-machine-m1/running.png){: width="600"}{: .center-image}
 
 ### 테스트 플라이트 배포
-이번에는 fastlane의 `pilot`을 사용해, Testflight로 앱을 업로드해보려 합니다.  
-다시 웹 에디터를 열어 새로운 워크플로우를 만들어봅시다.
+이번에는 fastlane의 `pilot`을 사용해, Testflight로 앱을 업로드해보려 합니다. 웹 에디터를 열어 새로운 워크플로우를 만들어봅시다.
 
 아래 워크플로우는, fastlane의 gym을 사용하여 아카이브를 만들고, pilot을 사용해 업로드를 하도록 되어있습니다.
 
@@ -182,16 +183,18 @@ jobs:
 
 ![upload-to-testflight](/assets/images/build-machine-m1/upload-to-testflight.png){: width="600"}{: .center-image}
 
-이렇게 `workflow_dispatch`를 사용하면, 워크플로우를 수동으로 시작할 수 있습니다.
+이렇게 `workflow_dispatch`를 사용하면, 워크플로우를 수동으로 시작할 수 있습니다. 자매품으로 `repository_dispatch`라는 녀석도 있는데, 어떤 차이가 있는지는 잘 모르겠습니다 🙄 (~~알려주세요~~)
 
 ---
 
 ## 마무리
-그동안 지그재그 iOS 앱을 기준으로, **비트라이즈 Cloud 환경**에서 앱 테스트는 `20분`, 배포는 `60분` 정도가 소요됐는데, **M1 맥미니**를 사용하니 테스트는 `3분`, 배포는 `15분`으로 단축되었습니다 🎉
+그동안 지그재그 iOS 앱을 기준으로, **비트라이즈 Cloud 환경**에서 앱 테스트는 `20분`, 배포는 `60분` 정도가 소요됐는데, **M1 맥미니**를 사용하니 테스트는 `4분`, 배포는 `15분`으로 단축되었습니다 🎉
 
 ![gaebi](/assets/images/build-machine-m1/gaebi.png){: width="400"}{: .center-image}
 
-물론 Cloud 환경의 Concurrency를 늘리면 대기열의 문제를 일시적으로 해소할 수 있겠지만, 1시간이 소요되는 긴 배포 시간은 해결할 수 없었습니다. 게다가 매달 비트라이즈에 지불하는 비용도 만만치 않기에, 로컬 빌드 머신이 적절한 타협점이라 생각했습니다.
+Cloud 환경의 Concurrency를 늘리면 대기열의 문제를 일시적으로 해소할 수 있겠지만, 비트라이즈에 지불하는 비용도 만만치 않고, 1시간이 소요되는 긴 배포 시간은 해결할 수 없었습니다.
+
+관리해야 할 것이 늘어난점은 마이너스지만, 장기적으로 보았을 때 로컬 빌드 머신이 적절한 타협점이라 생각했습니다.
 
 그럼 저는 이 글을 들고, M1 맥미니 더 사달라고 약을 팔러 가보겠습니다 😏  
 읽어주셔서 감사합니다 🙇🏻‍♂️
