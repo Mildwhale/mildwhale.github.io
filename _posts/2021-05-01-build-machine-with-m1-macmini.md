@@ -8,13 +8,13 @@ categories: [CI/CD]
 tags: [M1, Github Actions, CI/CD, Self-hosted]
 ---
 
-크로키닷컴의 앱 챕터는 Cloud기반 CI/CD 솔루션인 [비트라이즈(Bitrise)](https://www.bitrise.io)를 사용하여, 유닛 테스트와 빌드 배포를 수행하고 있었습니다.
+크로키닷컴의 앱 챕터는 Cloud 기반 CI/CD 솔루션인 [비트라이즈(Bitrise)](https://www.bitrise.io)를 사용하여, 유닛 테스트와 빌드 배포를 수행하고 있었습니다.
 
-그러던 어느 날, 몇 시간이 지나도 테스트용 빌드가 배포되지 않아 빌드 대기열을 열어보았더니, 수 많은 테스트와 빌드들이 자신의 차례를 기다리고 있는 것을 목격하게 되었습니다.  
+그러던 어느 날, 몇 시간이 지나도 테스트용 빌드가 배포되지 않아 빌드 대기열을 열어보았더니, 수많은 테스트와 빌드들이 자신의 차례를 기다리고 있는 것을 목격하게 되었습니다.  
 
 배포가 제대로 되지 않아, 테스트 일정에 영향을 주기도 했고, 개발자 개인 맥북으로 배포하는 좋지 않은 상황도 종종 발생했습니다.
 
-회사가 폭풍 성장하는 모습을 보니, 앞으로 이런 문제가 더 자주 발생할 것 같다는 확신이 들어, 성능 좋은 **로컬 빌드머신**이라는 약을 팔았고, 그것이 잘 팔려서(?) 오랜만에 글을 쓰게 됐습니다. 
+회사가 폭풍 성장하는 모습을 보니, 앞으로 이런 문제가 더 자주 발생할 것 같다는 확신이 들어, 성능 좋은 **로컬 빌드 머신**이라는 약을 팔았고, 그것이 잘 팔려서(?) 오랜만에 글을 쓰게 됐습니다. 
 
 > 이 글을 끝까지 읽고 따라오시면, 1시간이 걸리던 배포를 15분으로 단축시킨 마법을 함께 경험하실 수 있습니다 😎
 
@@ -25,7 +25,7 @@ tags: [M1, Github Actions, CI/CD, Self-hosted]
 ---
 
 ## Self-hosted runner?
-Github Actions는 사용자가 보유한 컴퓨팅 자원으로 빌드를 수행할 수 있는 **Self-hosted runner**를 지원합니다. 보통은 Cloud 환경에서 동작하는 가상 머신을 사용하지만, 이 글에서는 M1 맥미니를 빌드 머신으로 사용할겁니다.
+Github Actions는 사용자가 보유한 컴퓨팅 자원으로 빌드를 수행할 수 있는 **Self-hosted runner**를 지원합니다. 보통은 Cloud 환경에서 동작하는 가상 머신을 사용하지만, 이 글에서는 M1 맥미니를 빌드 머신으로 사용할 겁니다.
 
 ![spec-of-mac-mini](/assets/images/build-machine-m1/spec-of-mac-mini.png){: .center-image}
 
@@ -53,8 +53,8 @@ LoadError - dlsym(0x7f8926035eb0, Init_ffi_c): symbol not found - /Library/Ruby/
 ---
 
 ## Github Actions에 빌드 머신 등록하기
-빌드 머신의 기본 설정이 완료되었다면, 이제 Github Actions에 등록 할 차례입니다.  
-Action을 사용 할 Repository의 `Settings` 메뉴로 진입합니다.
+빌드 머신의 기본 설정이 완료되었다면, 이제 Github Actions에 등록할 차례입니다.  
+Action을 사용할 Repository의 `Settings` 메뉴로 진입합니다.
 
 ![settings](/assets/images/build-machine-m1/settings.png){: width="600"}{: .center-image}
 
@@ -72,15 +72,15 @@ macOS와 X64 Architecture를 선택합니다.
 
 마지막으로, 빌드 머신의 터미널을 열고 `Download`와 `Configure`항목에 있는 쉘 스크립트를 순서대로 실행합니다.
 
-`config.sh` 스크립트를 실행하면, 아래 이미지와 같이 설정 값을 입력할 수 있는 프롬프트가 보일겁니다. 구분하기 쉬운 이름을 입력하고 Enter. (⚠️ 이름은 수정이 불가능합니다 ⚠️)
+`config.sh` 스크립트를 실행하면, 아래 이미지와 같이 설정 값을 입력할 수 있는 프롬프트가 보일 겁니다. 구분하기 쉬운 이름을 입력하고 Enter. (⚠️ 이름은 수정이 불가능합니다 ⚠️)
 
 ![install](/assets/images/build-machine-m1/install.png){: width="600"}{: .center-image}
 
-다음은, 빌드 머신을 분류할 수 있는 라벨을 입력하는 과정 입니다. 라벨은 언제든 수정할 수 있으니 일단 Enter.
+다음은, 빌드 머신을 분류할 수 있는 라벨을 입력하는 과정입니다. 라벨은 언제든 수정할 수 있으니 일단 Enter.
 
 ![label](/assets/images/build-machine-m1/label.png){: width="600"}{: .center-image}
 
-마지막으로, 소스코드를 체크아웃 할 경로를 지정해줍니다. 기본값을 사용하거나, 원하는 경로를 지정한 후 Enter를 누르면, 설정이 저장되었다는 메시지를 볼 수 있습니다.
+마지막으로, 소스코드를 체크아웃할 경로를 지정해줍니다. 기본값을 사용하거나, 원하는 경로를 지정한 후 Enter를 누르면, 설정이 저장되었다는 메시지를 볼 수 있습니다.
 
 ![finish](/assets/images/build-machine-m1/finish.png){: width="600"}{: .center-image}
 
@@ -88,7 +88,7 @@ Github Actions에 빌드 머신 등록이 잘 됐는지 확인하기 위해, 다
 
 ![runners](/assets/images/build-machine-m1/runners.png){: width="600"}{: .center-image}
 
-조금전에 등록한 빌드 머신이 idle 상태로 보이면 성공적으로 등록이 된 것 입니다 🎉
+조금 전에 등록한 빌드 머신이 idle 상태로 보이면 성공적으로 등록이 된 것입니다 🎉
 
 ---
 
@@ -151,16 +151,16 @@ jobs:
       run: fastlane scan --workspace "MyProject.xcworkspace" --scheme "MyScheme"
 ```
 
-작성이 다 됐으면 리모트에 커밋합니다. 그리고 다시 Actions 메뉴로 들어가면 위에서 작성했던 워크플로우가 시작 된 것을 볼 수 있습니다.
+작성이 다 됐으면 리모트에 커밋합니다. 그리고 다시 Actions 메뉴로 들어가면 위에서 작성했던 워크플로우가 시작된 것을 볼 수 있습니다.
 
 ![run-action](/assets/images/build-machine-m1/run-action.png){: width="600"}{: .center-image}
 
-진행중인 워크플로우를 클릭해보면, 유닛 테스트가 진행중인 모습을 볼 수 있습니다 😎
+진행 중인 워크플로우를 클릭해보면, 유닛 테스트가 진행 중인 모습을 볼 수 있습니다 😎
 
 ![running](/assets/images/build-machine-m1/running.png){: width="600"}{: .center-image}
 
 ### 테스트 플라이트 배포
-이번에는 fastlane의 `pilot`을 사용해, Testflight로 앱을 업로드 해보려 합니다.  
+이번에는 fastlane의 `pilot`을 사용해, Testflight로 앱을 업로드해보려 합니다.  
 다시 웹 에디터를 열어 새로운 워크플로우를 만들어봅시다.
 
 아래 워크플로우는, fastlane의 gym을 사용하여 아카이브를 만들고, pilot을 사용해 업로드를 하도록 되어있습니다.
@@ -192,9 +192,9 @@ jobs:
       run: fastlane pilot upload
 ```
 
-유닛 테스트때와 특히 다른점은, `workflow_dispatch` 라는 조건이 추가되었다는 것 입니다. 어떤 것이 다른지 확인해보기 위해 Actions 메뉴로 진입하고, Upload To Testflight 워크플로우를 선택합니다.
+유닛 테스트 때와 특히 다른 점은, `workflow_dispatch`라는 조건이 추가되었다는 것입니다. 어떤 것이 다른지 확인해보기 위해 Actions 메뉴로 진입하고, Upload To Testflight 워크플로우를 선택합니다.
 
-화면 우측에 `run-workflow` 라는 버튼이 보이네요? 😲 궁금하니깐 한번 눌러봐야겠네요.
+화면 우측에 `run-workflow`라는 버튼이 보이네요? 😲 궁금하니깐 한번 눌러봐야겠네요.
 
 ![run-workflow](/assets/images/build-machine-m1/run-workflow.png){: .center-image}
 
@@ -211,13 +211,13 @@ jobs:
 ---
 
 ## 마무리
-그동안 지그재그 iOS 앱을 기준으로, 비트라이즈 Cloud 환경에서 앱 테스트는 `20분`, 배포는 `60분` 정도가 소요됐는데, M1 맥미니를 Self-hosted runner로 사용하니, 테스트는 `3분`, 배포는 `15분`으로 단축되었습니다 🎉
+그동안 지그재그 iOS 앱을 기준으로, 비트라이즈 Cloud 환경에서 앱 테스트는 `20분`, 배포는 `60분` 정도가 소요됐는데, M1 맥미니를 사용하니 테스트는 `3분`, 배포는 `15분`으로 단축되었습니다 🎉
 
 ![gaebi](/assets/images/build-machine-m1/gaebi.png){: width="400"}{: .center-image}
 
 물론 Cloud 환경의 Concurrency를 늘리면 대기열의 문제를 일시적으로 해소할 수 있겠지만, 1시간이 소요되는 긴 배포 시간은 해결할 수 없었습니다. 게다가 매달 비트라이즈에 지불하는 비용도 만만치 않기에, 로컬 빌드 머신이 적절한 타협점이라 생각했습니다.
 
-그럼 저는 이 글을 들고, M1 맥미니 더 사달라고 약을 팔러 가보겠습니다.  
+그럼 저는 이 글을 들고, M1 맥미니 더 사달라고 약을 팔러 가보겠습니다 😏
 읽어주셔서 감사합니다 🙇🏻‍♂️
 
 ---
