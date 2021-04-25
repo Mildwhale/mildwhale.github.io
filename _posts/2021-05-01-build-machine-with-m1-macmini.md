@@ -5,10 +5,9 @@ description: "M1 맥미니를 빌드 머신으로 만들어보자"
 author: "kyujin.kim"
 date: 2021-04-25
 categories: [CI/CD]
+bigimg: assets/images/build-machine-m1/title.jpg 
 tags: [M1, Github Actions, CI/CD, Self-hosted]
 ---
-
-![title](/assets/images/build-machine-m1/title.png){: height="150"}{: .center-image}
 
 크로키닷컴의 앱 챕터는 Cloud 기반 CI/CD 솔루션인 [비트라이즈(Bitrise)](https://www.bitrise.io)를 사용하여, 유닛 테스트와 빌드 배포를 수행하고 있었습니다.
 
