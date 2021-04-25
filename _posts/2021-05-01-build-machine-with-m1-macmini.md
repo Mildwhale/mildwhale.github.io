@@ -3,18 +3,20 @@ layout: post
 title: "Github Actions의 Self-hosted runner 사용기"
 description: "M1 맥미니를 빌드 머신으로 만들어보자"
 author: "kyujin.kim"
-date: 2021-04-01
+date: 2021-04-25
 categories: [CI/CD]
 tags: [M1, Github Actions, CI/CD, Self-hosted]
 ---
 
+![title](/assets/images/build-machine-m1/title.png){: height="150"}{: .center-image}
+
 크로키닷컴의 앱 챕터는 Cloud 기반 CI/CD 솔루션인 [비트라이즈(Bitrise)](https://www.bitrise.io)를 사용하여, 유닛 테스트와 빌드 배포를 수행하고 있었습니다.
 
-그러던 어느 날, 몇 시간이 지나도 테스트용 빌드가 배포되지 않아 빌드 대기열을 열어보았더니, 수많은 테스트와 빌드들이 자신의 차례를 기다리고 있는 것을 목격하게 되었습니다.  
+그러던 어느 날, 몇 시간이 지나도 테스트용 빌드가 배포되지 않아 빌드 대기열을 확인했더니, 수많은 테스트와 빌드들이 자신의 차례를 기다리고 있는 것을 목격했습니다.
 
-배포가 제때 되지 않으니, 개발자 개인 맥북으로 배포하는 좋지 않은 상황도 종종 발생했고, 테스트 일정에 영향을 주기도 했습니다 😵
+배포가 제때 되지 않으니, 개발자 개인 맥북으로 배포하는 상황도 종종 발생했고, 테스트 일정에 영향을 주기도 했습니다 😵
 
-회사가 폭풍 성장하는 모습을 보니, 앞으로 이런 문제가 더 자주 발생할 것 같다는 확신이 들어, 성능 좋은 **로컬 빌드 머신**이라는 약을 팔았고, ~~그것이 잘 팔려서~~ 오랜만에 글을 쓰게 됐습니다. 
+회사가 폭풍 성장하는 모습을 보니, 앞으로 이런 문제가 더 자주 발생할 것 같다는 확신이 들어, 성능 좋은 **로컬 빌드 머신**이라는 약을 팔았고, ~~그것이 잘 팔려서~~ 오랜만에 글을 쓰게 됐습니다.
 
 ![plan](/assets/images/build-machine-m1/plan.jpg){: width="600"}{: .center-image}
 
@@ -23,7 +25,7 @@ tags: [M1, Github Actions, CI/CD, Self-hosted]
 ---
 
 ## Self-hosted runner?
-Github Actions는 사용자가 보유한 컴퓨팅 자원으로 빌드를 수행할 수 있는 **Self-hosted runner**를 지원합니다. 보통은 Cloud 환경에서 동작하는 가상 머신을 사용하지만, 이 글에서는 M1 맥미니를 빌드 머신으로 사용할 겁니다.
+Github Actions는 사용자가 보유한 컴퓨팅 자원으로 빌드를 수행할 수 있는 **Self-hosted runner**를 지원합니다. 보통은 Cloud 환경에서 동작하는 가상 머신을 사용하는데, 저는 M1 맥미니를 빌드 머신으로 사용해볼 겁니다 🤑
 
 ![spec-of-mac-mini](/assets/images/build-machine-m1/spec-of-mac-mini.png){: .center-image}
 
@@ -32,10 +34,11 @@ Github Actions는 사용자가 보유한 컴퓨팅 자원으로 빌드를 수행
 ---
 
 ## M1 빌드 머신 준비하기
-Xcode, Brew, Cocoapods, Fastlane 등 빌드 및 배포에 필요한 소프트웨어를 설치해줍니다.  
-주의해야 할 점은, 소프트웨어에 따라 M1 Chip을 제대로 지원하지 않는 경우가 있습니다.
+이제 빌드 및 배포에 필요한 소프트웨어를 설치해야 하는데요, 이 글에서 사용할 소프트웨어는 `Xcode, Brew, Cocoapods, Fastlane`이니 각자의 방식대로 설치해주세요. (이미 설치가 되어있다면 SKIP 해주세요)
 
-대표적으로 Cocoapods이 있는데요, Cocoapods을 설치하고 `pod install`을 실행하면 무시무시한 에러를 만나게 됩니다 😵  
+참고로, 소프트웨어에 따라 M1 Chip을 제대로 지원하지 않는 경우가 있습니다.  
+
+대표적으로 `pod install`이 되지 않는 에러가 있는데요, Cocoapods을 처음 설치하고 `pod install`을 실행하면 무시무시한 에러를 만나게 됩니다 😵  
 ```
 LoadError - dlsym(0x7f8926035eb0, Init_ffi_c): symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle
 /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
@@ -56,15 +59,15 @@ Action을 사용할 Repository의 `Settings` 메뉴로 진입합니다.
 
 ![settings](/assets/images/build-machine-m1/settings.png){: width="600"}{: .center-image}
 
-Settings 화면의 왼쪽 사이드바에 있는 `Actions` 메뉴를 선택합니다.
+Settings 화면의 왼쪽 사이드바에 있는 `Actions` 메뉴를 클릭.
 
 ![actions](/assets/images/build-machine-m1/actions.png){: .center-image}
 
-Actions 화면 제일 아래에 있는 `Add Runner` 버튼을 누릅니다.
+Actions 화면 제일 아래에 있는 `Add Runner` 버튼을 클릭합니다.
 
 ![add-runner](/assets/images/build-machine-m1/add-runner.png){: width="600"}{: .center-image}
 
-macOS와 X64 Architecture를 선택합니다.
+macOS와 X64 Architecture를 선택.
 
 ![os-arch](/assets/images/build-machine-m1/os-arch.png){: .center-image}
 
@@ -97,7 +100,7 @@ Repository의 Actions 메뉴로 진입해서 `New workflow` 버튼을 누릅니�
 
 ![new-workflow](/assets/images/build-machine-m1/new-workflow.png){: .center-image}
 
-`set up a workflow yourself ->` 를 누르면, 웹 에디터로 진입합니다.
+`set up a workflow yourself ->` 를 클릭해서 웹 에디터로 진입합니다.
 
 ![setup-workflow](/assets/images/build-machine-m1/setup-workflow.jpg){: width="600"}{: .center-image}
 
@@ -127,7 +130,7 @@ jobs:
       run: fastlane scan --workspace "MyProject.xcworkspace" --scheme "MyScheme"
 ```
 
-작성이 다 됐으면 리모트에 커밋합니다. 그리고 다시 Actions 메뉴로 들어가면 위에서 작성했던 워크플로우가 시작된 것을 볼 수 있습니다.
+작성이 다 됐으면 리모트에 커밋하고, 다시 Actions 메뉴로 들어가면 위에서 작성했던 워크플로우가 시작된 것을 볼 수 있습니다.
 
 ![run-action](/assets/images/build-machine-m1/run-action.png){: width="600"}{: .center-image}
 
@@ -136,12 +139,12 @@ jobs:
 ![running](/assets/images/build-machine-m1/running.png){: width="600"}{: .center-image}
 
 ### 테스트 플라이트 배포
-이번에는 fastlane의 `pilot`을 사용해, Testflight로 앱을 업로드해보려 합니다. 웹 에디터를 열어 새로운 워크플로우를 만들어봅시다.
+이번에는 fastlane의 `pilot`을 사용해, TestFlight로 앱을 업로드해볼 겁니다. 그럼 새로운 워크플로우를 만들어야겠죠? 웹 에디터를 열고, 아래 코드를 참고해 워크플로우를 추가해주세요.  
 
-아래 워크플로우는, fastlane의 gym을 사용하여 아카이브를 만들고, pilot을 사용해 업로드를 하도록 되어있습니다.
+이 워크플로우는, fastlane의 gym을 사용하여 아카이브를 만들고, pilot을 사용해 업로드를 하도록 되어있습니다.  
 
 ```yaml
-name: Uplaod To Testflight
+name: Uplaod To TestFlight
 
 on: 
   push:
@@ -167,7 +170,7 @@ jobs:
       run: fastlane pilot upload
 ```
 
-유닛 테스트 때와 특히 다른 점은, `workflow_dispatch`라는 조건이 추가되었다는 것입니다. 어떤 것이 다른지 확인해보기 위해 Actions 메뉴로 진입하고, Upload To Testflight 워크플로우를 선택합니다.
+유닛 테스트 때와 특히 다른 점은, `workflow_dispatch`라는 조건이 추가되었다는 것입니다. 어떤 것이 다른지 확인해보기 위해 Actions 메뉴로 진입하고, Upload To TestFlight 워크플로우를 선택합니다.
 
 ![workflows](/assets/images/build-machine-m1/workflows.png){: .center-image}
 
@@ -183,20 +186,20 @@ jobs:
 
 ![upload-to-testflight](/assets/images/build-machine-m1/upload-to-testflight.png){: width="600"}{: .center-image}
 
-이렇게 `workflow_dispatch`를 사용하면, 워크플로우를 수동으로 시작할 수 있습니다. 자매품으로 `repository_dispatch`라는 녀석도 있는데, 어떤 차이가 있는지는 잘 모르겠습니다 🙄 (~~알려주세요~~)
+이렇게 `workflow_dispatch`를 사용하면, 워크플로우를 수동으로 시작할 수 있습니다. 자매품으로 `repository_dispatch`라는 아이도 있는데, 아직까지는 어떤 차이가 있는지 잘 모르겠습니다 🙄 (~~알려주세요~~)
 
 ---
 
 ## 마무리
-그동안 지그재그 iOS 앱을 기준으로, **비트라이즈 Cloud 환경**에서 앱 테스트는 `20분`, 배포는 `60분` 정도가 소요됐는데, **M1 맥미니**를 사용하니 테스트는 `4분`, 배포는 `15분`으로 단축되었습니다 🎉
+**비트라이즈를 사용하는 동안**, 지그재그 iOS 앱을 기준으로 앱 테스트는 `20분`, 배포는 `60분` 정도가 소요됐는데, **M1 맥미니**를 사용하니 테스트는 `4분`, 배포는 `15분`으로 단축되었습니다 🎉
 
 ![gaebi](/assets/images/build-machine-m1/gaebi.png){: width="400"}{: .center-image}
 
-Cloud 환경의 Concurrency를 늘리면 대기열의 문제를 일시적으로 해소할 수 있겠지만, 비트라이즈에 지불하는 비용도 만만치 않고, 1시간이 소요되는 긴 배포 시간은 해결할 수 없었습니다.
+Cloud 환경의 Concurrency를 늘리면 대기열의 문제를 일시적으로 해소할 수 있겠지만, 비트라이즈에 지불하는 비용도 만만치 않고, 1시간이나 소요되는 긴 배포 시간은 해결할 수 없었습니다.
 
-관리해야 할 것이 늘어난점은 마이너스지만, 장기적으로 보았을 때 로컬 빌드 머신이 적절한 타협점이라 생각했습니다.
+관리해야 할 것이 늘어난 점은 마이너스지만, 장기적으로 보았을 때 로컬 빌드 머신이 적절한 타협점이라 생각했습니다.
 
-그럼 저는 이 글을 들고, M1 맥미니 더 사달라고 약을 팔러 가보겠습니다 😏  
+그럼 저는 이 글을 가지고, M1 맥미니를 더 사달라고 약을 팔아봐야겠네요 😏  
 읽어주셔서 감사합니다 🙇🏻‍♂️
 
 ---
