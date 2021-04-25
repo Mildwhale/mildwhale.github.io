@@ -3,7 +3,7 @@ layout: post
 title: "Github Actions의 Self-hosted runner 사용기"
 description: "M1 맥미니를 빌드 머신으로 만들어보자"
 author: "kyujin.kim"
-date: 2021-04-25
+date: 2021-04-24
 categories: [CI/CD]
 bigimg: assets/images/build-machine-m1/title.jpg 
 tags: [M1, Github Actions, CI/CD, Self-hosted]

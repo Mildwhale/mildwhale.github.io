@@ -196,11 +196,9 @@ defaults:
     values:
       layout: "page"
       show-avatar: true
-  -
-    scope:
-      path: ""
-    values:
-      image: /assets/images/default.jpg
+
+image:
+  path: /assets/images/default.jpg
 
 # Use tags index page and make tags on each post clickable
 link-tags: true
