@@ -7,11 +7,8 @@ date: 2021-04-25
 categories: [CI/CD]
 bigimg: assets/images/build-machine-m1/title.jpg 
 tags: [M1, Github Actions, CI/CD, Self-hosted]
-defaults:
-  - scope:
-      path: ""
-    values:
-      image: /assets/images/build-machine-m1/top.png
+image:
+  path: /assets/images/build-machine-m1/top.png
 ---
 
 크로키닷컴의 앱 챕터는 Cloud 기반 CI/CD 솔루션인 [비트라이즈(Bitrise)](https://www.bitrise.io)를 사용하여, 유닛 테스트와 빌드 배포를 수행하고 있었습니다.
