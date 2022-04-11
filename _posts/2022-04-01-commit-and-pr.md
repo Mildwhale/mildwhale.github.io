@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "코드 리뷰하기 좋은 PR 만들기"
-description: "효율적인 협업을 위한 기술"
+description: "효율적인 협업을 위한 나만의 커밋과 브랜치 전략"
 author: "kyujin.kim"
 date: 2022-04-01
 tags: [협업]
