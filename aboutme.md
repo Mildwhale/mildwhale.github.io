@@ -8,7 +8,7 @@ description: iOS Software Engineer
 
 # **김규진 (Kyujin Kim)**
 ---
-**Email** <mailto:mildwhale@gmail.com>  
+**Email** <mailto:hysterit@gmail.com>  
 **Github** [https://github.com/Mildwhale](https://github.com/Mildwhale)  
 **Blog** [https://mildwhale.github.io](https://mildwhale.github.io)  
 <br/>
@@ -18,10 +18,7 @@ description: iOS Software Engineer
 ### ‣ 크로키닷컴
 #### [2020. 6 ~ 재직중]
 - **지그재그** iOS 서비스 개발 및 유지 보수를 담당하고 있습니다.
-- Bitrise를 활용해 CI/CD 환경을 구축했습니다.
-- PhotoKit과 Image I/O를 사용하여 리뷰 사진첨부 기능을 구현했습니다.  
-- Github Actions를 활용해 CI/CD 환경을 구축했습니다.  
-- 사용자 데이터를 서버와 연동하기 위한 개발을 담당하고 있습니다.  
+- Github Actions 및 node.js를 활용해 CI/CD 환경을 구성했습니다.  
 <br/>
 
 ---
