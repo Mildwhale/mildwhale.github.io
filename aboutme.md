@@ -15,10 +15,25 @@ description: iOS Software Engineer
 
 # **EXPERIENCE**
 ---
-### ‣ 크로키닷컴
+### ‣ 카카오스타일
 #### [2020. 6 ~ 재직중]
-- **지그재그** iOS 서비스 개발 및 유지 보수를 담당하고 있습니다.
-- Github Actions 및 node.js를 활용해 CI/CD 환경을 구성했습니다.  
+- 지그재그 iOS 앱 개발
+  - 지그재그 iOS 서비스 개발 및 유지 보수를 담당하고 있습니다.
+  - 글로벌 서비스를 위한 다국어 지원 기능을 개발했습니다.
+  - 로그인, 인증, 리뷰 기능을 개발/유지 보수 했습니다.
+  - 공용 사진첩을 개발해, 다수 프로젝트의 개발시간을 단축 시켰습니다.
+  - 상품 상세 화면을 네이티브로 전환하여, 최초 진입 시 레이턴시가 최대 90% 감소했습니다.
+- CI/CD
+  - 앱개발팀에서 사용하는 CI/CD 환경을 주도적으로 관리하고 있습니다.
+  - Github Action(with Self-hosted)을 메인으로 사용하며, Bitrise를 백업 환경으로 구성했습니다.
+  - 지그재그, 포스티, 패션 바이 카카오 서비스 모두 CI/CD 연동되어 있습니다.
+  - Self-hosted(Github Action) 빌드 머신을 도입해 1시간이 걸리던 배포를 10분으로 단축했습니다.  
+<br/>
+
+#### 블로그 포스트
+- [이미지 리사이징을 활용한 메모리 최적화](/2020-07-12-reduce-memory-usage-with-downsampling/)
+- [Github Actions의 Self-hosted runner 사용기](/2021-04-24-build-machine-with-m1-macmini/)
+- [코드 리뷰하기 좋은 PR 만들기](/2022-04-01-commit-and-pr/)  
 <br/>
 
 ---
